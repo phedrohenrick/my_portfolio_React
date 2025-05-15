@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+Aqui está o README traduzido e melhor estruturado para o seu portfólio:  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# Meu Portfólio – React + TypeScript + Vite  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bem-vindo ao meu portfólio! Este projeto exibe minhas habilidades, projetos e experiência como desenvolvedor. Construído com **React, TypeScript e Vite**, ele oferece uma experiência rápida e otimizada para o usuário.  
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas  
+- **React** – Biblioteca para construção de interfaces interativas  
+- **TypeScript** – JavaScript tipado para melhor manutenção do código  
+- **Vite** – Ambiente de desenvolvimento moderno e rápido  
+- **Styled Components** – Estilização baseada em componentes  
+- **Framer Motion** – Animações para uma experiência dinâmica  
+- **Swiper.js** – Carrossel para exibição de projetos  
+- **Material UI** – Componentes de UI para um design profissional  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Funcionalidades  
+✅ **Totalmente Responsivo** – Adapta-se a todos os tamanhos de tela  
+✅ **Animações Suaves** – Melhor experiência com Framer Motion  
+✅ **Exibição de Projetos** – Showcase interativo usando Swiper.js  
+✅ **Seção de Contato** – Fácil comunicação comigo  
+✅ **Alto Desempenho** – Otimizado com Vite  
 
-- Configure the top-level `parserOptions` property like this:
+## 📷 Prévia  
+![Prévia do Portfólio](https://seu-link-de-imagem.com) *(Substitua pelo link real da imagem)*  
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Como Rodar o Projeto  
+
+### Clone o repositório  
+```bash
+git clone https://github.com/phedrohenrick/meu-portfolio.git
+cd meu-portfolio
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Instale as dependências  
+```bash
+npm install
 ```
+
+### Inicie o servidor de desenvolvimento  
+```bash
+npm run dev
+```
+
+### Gere a versão de produção  
+```bash
+npm run build
+```
+
+##  Contato  
+Se quiser colaborar ou tiver alguma dúvida, entre em contato:  
+ Email: phedrohenrickdasilva@gmail.com 
+ [LinkedIn](https://linkedin.com/in/phedrohenrick)  
+ [GitHub](https://github.com/phedrohenrick)  
+
+---
+
+Esse README deixa seu repositório mais organizado e profissional. Quer personalizar mais alguma coisa? 🚀
