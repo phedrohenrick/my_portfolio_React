@@ -222,7 +222,7 @@ import { Typography } from "@mui/material";
                   <motion.div
                   layoutId={`image-${index}`}
                   className = "relative w-full"
-                  style = {{paddingTop : "3%", margin: "0 10px", maxWidth: "90%", margin: "0 auto"}}
+                  style = {{paddingTop : "3%", maxWidth: "90%", margin: "0 auto"}}
                   whileHover={{scale:1.05, transition: { duration: 0.3 }}}
                   >
                     <Image

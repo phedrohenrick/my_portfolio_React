@@ -7,7 +7,6 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import StyledButton from "../../../../components/StyledButton/StyledButton";
 import AnimatedBackground from "../../../../assets/images/AnimatedBackground/AnimatedBackground.svg";
-import theme from "../../../../theme";
 import {downloadFile} from "../../../../components/Functions/DownloadFile.tsx"
 import { IconButton } from '@mui/material';
 import { motion } from "framer-motion";

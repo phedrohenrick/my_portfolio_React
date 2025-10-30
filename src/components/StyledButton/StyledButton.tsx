@@ -1,4 +1,3 @@
-import styled from "@emotion/styled"
 import theme from "../../theme"
 import { ReactNode} from "react"
 import { motion } from "framer-motion";
