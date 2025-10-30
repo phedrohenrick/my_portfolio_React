@@ -138,11 +138,34 @@ import { Typography } from "@mui/material";
            "Java",
            "Quarkus",
            "Microserviços",
-           "Kafkaa",
+           "Kafka",
            "postgreSQL",
            "Hibernate",
             "Maven",
             "Docker",
+          ],
+        isInDevelopment: false
+      },
+      
+      {
+        title: <Trans
+        i18nKey="title_p7" 
+       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+       />,
+        description: <Trans
+        i18nKey="desc_p7" 
+       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+       />,
+        imageUrl: "DownloadFiles/images/api_Quarkus.png",
+        link: "https://github.com/phedrohenrick/API_call_for_papers-Quarkus",
+        technologies:[
+           "Quarkus",
+           "Java 21",
+           "PostgreSQL",
+           "Docker",
+           "RestEasy",
+           "Maven",
+           "GitHub"
           ],
         isInDevelopment: false
       },
@@ -164,9 +187,9 @@ import { Typography } from "@mui/material";
         <div className="w-[100%] relative">
 
         <Swiper
-          slidesPerView={1.65}
+          slidesPerView={1.8}
           loop={true}
-          spaceBetween={15}
+          spaceBetween={10}
           autoplay={{
             delay: 2500,
             disableOnInteraction: true,
@@ -182,10 +205,10 @@ import { Typography } from "@mui/material";
 
           breakpoints={{
             1024: {
-              slidesPerView: 2.1,
+              slidesPerView: 2.5,
             },
             300: {
-              slidesPerView: 1.1,
+              slidesPerView: 1.3,
             },
         
           }}
@@ -197,17 +220,14 @@ import { Typography } from "@mui/material";
               <motion.div layoutId={`card-${index}`} className="relative">
                 {data.imageUrl ? (
                   <motion.div
-
                   layoutId={`image-${index}`}
-                  className = "relative"
-                  style = {{paddingTop : "3%"}}
-                  whileHover={{scale:0.9}}
-
+                  className = "relative w-full"
+                  style = {{paddingTop : "3%", margin: "0 10px", maxWidth: "90%", margin: "0 auto"}}
+                  whileHover={{scale:1.05, transition: { duration: 0.3 }}}
                   >
                     <Image
                       alt="Project image"
                       src={data.imageUrl}
-                      
                       style={{ objectFit: "cover" }}
                       className="w-full h-full bg-primary"
                     />

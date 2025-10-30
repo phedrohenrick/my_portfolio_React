@@ -15,8 +15,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useState } from "react";
 
 
-const Hero = () =>{  //uma notação diferente para function 
-
+const Hero = () => {
   const {
     t, 
     i18n : {changeLanguage, language}
@@ -41,190 +40,188 @@ const Hero = () =>{  //uma notação diferente para function
   const StyledHero = styled("div")(({theme}) => ({
     backgroundImage: `url(${AnimatedBackground})`,
     alignItems: "center",
-  
-
-
-    [theme.breakpoints.up('xs')]: { // <= mobile
+    minHeight: "100vh",
+    display: "flex",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: "60px",
+      minHeight: "100vh",
+      backgroundPosition: "center top"
+    },
+    [theme.breakpoints.up('sm')]: {
       paddingTop: "40px",
-
-  },
-  [theme.breakpoints.up('md')]: { // >=mobile
+    },
+    [theme.breakpoints.up('md')]: {
       paddingTop: "0",
-  },
-  
+    },
   }))
 
-  const StyledImg = styled("img")(() => ({
-        
-      
-        borderRadius :"50%",
-        border: `1px solid ${theme.palette.primary.dark}`,
-       
+  const StyledImg = styled("img")(({theme}) => ({
+    borderRadius: "50%",
+    border: `1px solid ${theme.palette.primary.dark}`,
+    width: "100%",
+    maxWidth: "300px",
+    height: "auto",
+    
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: "200px",
+    },
+    [theme.breakpoints.between('sm', 'md')]: {
+      maxWidth: "250px",
+    }
   }))
-  
- 
-    return (
-      <>
-      
-      <StyledHero  className="
-                flex
-                items-center
-                justify-center
-                bg-cover 
-                bg-no-repeat 
-                bg-center 
-                sm:bg-top 
-                md:bg-center 
-                lg:bg-bottom 
-                h-[120vh] 
-                w-full
-                pt-12
-            ">
 
-          <Container>
+  return (
+    <StyledHero>
+      <Container maxWidth="lg">
+        {/* Language Button - Mobile Optimized */}
+        <Grid container>
+          <Grid item xs={12} sx={{
+            position: 'absolute',
+            top: { xs: 10, sm: 20 },
+            right: { xs: 10, sm: 20 },
+            zIndex: 10
+          }}>
+            <button 
+              onClick={() => handleChangeLanguage()} 
+              style={{
+                padding: '8px 16px',
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '20px',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              <Trans
+                i18nKey="btnChangeLanguage" 
+                components={{ 1: <span style={{color: "#E67E22"}}/>}} 
+              />
+            </button>
+          </Grid>
+        </Grid>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{once: true}}
+        >
+          <Grid container spacing={4} justifyContent="center" alignItems="center">
+            {/* Avatar */}
+            <Grid item xs={12} md={5} sx={{ textAlign: 'center', order: { xs: 1, md: 1 } }}>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center',
+                mb: { xs: 2, md: 0 }
+              }}>
+                <StyledImg src={Avatar} alt="Avatar" />
+              </Box>   
+            </Grid>
+            
+            {/* Content */}
+            <Grid item xs={12} md={7} sx={{ order: { xs: 2, md: 2 } }}>
+              <Typography 
+                variant="h1" 
+                color="secondary" 
+                textAlign="center"
+                sx={{
+                  fontSize: {
+                    xs: '1.8rem',
+                    sm: '2.5rem',
+                    md: '3rem',
+                    lg: '4rem',
+                    xl: '5rem'
+                  },
+                  fontWeight: 'bold',
+                  mb: 1
+                }}
+              >
+                Phedro Henrick
+              </Typography>
               
-              <Grid container spacing={4} > 
-                <Grid  item
-                    xs={12}
-                    md={12}
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      margin: '2rem',
-                      marginBottom: "100px"
-                    }}>
-                  <button  onClick={() => handleChangeLanguage()} 
-                   className="
-                  
-                   pt-2
-                  text-white
-                  cursor-pointer
-                  bg-inherit
-                  border-transparent
-                  z-10
-                  xl: text-xl
-                  sm: text-sm
-                 " >
-                  
-                  <Trans
-                  i18nKey="btnChangeLanguage" 
-                 components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
-                 />
+              <Typography 
+                variant="h2" 
+                color="secondary" 
+                textAlign="center"
+                sx={{
+                  fontSize: {
+                    xs: '1.2rem',
+                    sm: '1.5rem',
+                    md: '2rem',
+                    lg: '2.5rem'
+                  },
+                  mb: 3
+                }}
+              >
+                {t('title')}
+              </Typography>
 
-                  </button>
+              {/* Buttons */}
+              <Grid container spacing={2} justifyContent="center" sx={{ mb: 3 }}>
+                <Grid item xs={12} sm={6} md={6}>
+                  <StyledButton onClick={() => handleDownload()}>
+                    <DownloadIcon sx={{ mr: 1 }} />
+                    <Typography variant="body2">
+                      {t('btnCv')}
+                    </Typography>
+                  </StyledButton>
+                </Grid>
+                <Grid item xs={12} sm={6} md={6}>
+                  <StyledButton onClick={() => HandleClickConatact("#footer")}>
+                    <EmailIcon sx={{ mr: 1 }} />
+                    <Typography variant="body2">
+                      {t('btnContact')}
+                    </Typography>
+                  </StyledButton>
                 </Grid>
               </Grid>
 
-              <motion.div 
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ 
-                opacity: 1,
-                y : 0
-                
-              }}
-              
-              transition={{ duration: 0.4 }}
-              viewport={{once:true}}>
-
-              <Grid container spacing={4} justifyContent="center"  alignItems="center" >
-                  <Grid item xs={12} md = {5} style={{ textAlign: 'center' }} className="relative">
-                    <Box className="relative z-0 w-36 top-[10%] xs:w-44 sm:w-48 md:w-60 xl:w-72">
-                    <StyledImg src = {Avatar}/>
-                    </Box>   
-                  </Grid>
-                  
-                  <Grid item xs={12} md = {7} >
-                    
-                      <Typography variant="h1" color = "secondary" textAlign="center"   className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center text-secondary pb-2">Phedro Henrick</Typography>
-                      <Typography variant="h2" color = "secondary" textAlign="center" >{t('title')}</Typography>
-
-                    <Grid container display="flex" justifyContent="center" spacing={2} pt={3} marginBottom={3} >
-                          <Grid item xs = {12} md={6} display= "flex" justifyContent="center">
-                            
-                              <StyledButton onClick={()=> {handleDownload()}}>
-                                <DownloadIcon/>
-                                <Typography variant="body2">
-                                    {t('btnCv')}
-                                </Typography>
-                              </StyledButton>
-                           
-                          </Grid>
-                      <Grid item  xs = {12} md={6}  display= "flex" justifyContent="center" >
-                        
-                      <StyledButton onClick={() => {HandleClickConatact("#footer")}} >
-                          <EmailIcon />
-                          <Typography variant="body2">
-                          {t('btnContact')}
-                         </Typography>
-                      </StyledButton>
-                      </Grid>
+              {/* Social Icons */}
+              <Grid container justifyContent="center" spacing={1}>
+                {[
+                  { icon: GitHubIcon, href: "https://github.com/phedrohenrick" },
+                  { icon: LinkedInIcon, href: "https://www.linkedin.com/in/phedro-henrick-da-silva-le%C3%A3o-b13b96234/" },
+                  { icon: InstagramIcon, href: "https://www.instagram.com/asking_dev/" }
+                ].map((social, index) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <Grid item key={index}>
+                      <motion.div whileHover={{ scale: 1.2, opacity: 1 }} whileTap={{ scale: 0.9 }}>
+                        <IconButton 
+                          href={social.href} 
+                          target="_blank" 
+                          sx={{
+                            color: '#dfe8e8',
+                            fontSize: { xs: 35, sm: 45, md: 50 },
+                            opacity: 0.7,
+                            '@media (max-width: 899px)': {
+                              color: '#254346',
+                              opacity: 0.7,
+                            },
+                          }}
+                        >
+                          <IconComponent sx={{ fontSize: 'inherit' }} />
+                        </IconButton>
+                      </motion.div>
                     </Grid>
-                    <Grid container display="flex" justifyContent="center"  pt={3} marginBottom={3} >
-                      <Grid item xs = {4} md={2}  display= "flex" justifyContent="center" >
-                        <motion.div whileHover={{ scale: 1.2, opacity: 1 }} whileTap={{ scale: 0.9 }}>
-                          <IconButton href={"https://github.com/phedrohenrick"} target="_blank" sx={{
-                                  color: '#dfe8e8', // Cor padrão
-                                  fontSize: 50,
-                                  opacity: 0.7,
-                                  '@media (max-width: 899px)': { // Quando a tela for menor que 600px (breakpoint "sm")
-                                    color: '#254346', // Cor preta no mobile
-                                    opacity: 0.7,
-                                  },
-                                }}>
-                              <GitHubIcon sx={{ fontSize: 50 }} />
-                          </IconButton>
-                          </motion.div>
-                      </Grid>
-                      <Grid item xs = {4} md={2}  display= "flex" justifyContent="center" >
-                      <motion.div whileHover={{ scale: 1.2, opacity: 1 }} whileTap={{ scale: 0.9 }}>
-                        <IconButton href={"https://www.linkedin.com/in/phedro-henrick-da-silva-le%C3%A3o-b13b96234/"} target="_blank" sx={{
-                                color: '#dfe8e8', // Cor padrão
-                                fontSize: 50,
-                                opacity: 0.7,
+                  );
+                })}
+              </Grid>
+            </Grid>
+          </Grid>
+        </motion.div>
+      </Container>
+    </StyledHero>
+  );
+};
 
-                                '@media (max-width: 899px)': { // Quando a tela for menor que 600px (breakpoint "sm")
-                                  color: '#254346', // Cor preta no mobile
-                                  opacity: 0.7,
-
-                                },
-                              }}>
-                            <LinkedInIcon sx={{ fontSize: 50 }}/>
-                        </IconButton>
-                        </motion.div>
-                      </Grid>
-                      <Grid item xs = {4} md={2}  display= "flex" justifyContent="center" >
-                      <motion.div whileHover={{ scale: 1.2, opacity: 1 }} whileTap={{ scale: 0.9 }}>
-                        <IconButton href={"https://www.instagram.com/asking_dev/"} target="_blank"  sx={{
-                                color: '#dfe8e8', // Cor padrão
-                                fontSize: 50,
-                                opacity: 0.7,
-
-                                '@media (max-width: 899px)': { // Quando a tela for menor que 600px (breakpoint "sm")
-                                  color: '#254346', // Cor preta no mobile
-                                  opacity: 0.7,
-
-                                },
-                              }}>
-                            <InstagramIcon sx={{ fontSize: 50}}/>
-                        </IconButton>
-                        </motion.div>
-                      </Grid>
-                      </Grid>
-                  </Grid>
-                </Grid>
-              </motion.div>
-              
-              </Container>
-
-             
-          </StyledHero> 
-        
-      </>
-    )
-
-  }
-  export default Hero
+export default Hero;
 
   
 

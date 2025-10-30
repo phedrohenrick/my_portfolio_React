@@ -7,7 +7,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { downloadFile } from "../../../../components/Functions/DownloadFile";
 import { Trans, useTranslation } from 'react-i18next'
-
+ 
 
 const Footer = () =>{ //uma notação diferente para function 
 

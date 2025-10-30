@@ -34,6 +34,8 @@
         "title_p6": "Backend Mineradora com Quarkus",
         "desc_p6": "Aqui, desenvolvo o backend para um sistema de uma mineradora com o intuito de explorar o Quarkus Framework e a mensageria com Kafka. Nesse sistema, adoto a arquitetura de microserviços, que se comunicam via REST e mensageria, em uma abordagem híbrida. O sistema é composto por quatro microserviços: um gerencia as autenticações, outro consulta a cotação atual do dólar por meio de uma API externa, o terceiro administra as propostas de compra dos clientes, e o quarto envia essas propostas para os analistas junto a cotação do dólar do dia. Os dados para o microserviço de propostas são recebidos via eventos do Kafka, enviados pelo segundo e terceiro microserviços. Venha conhecer mais!",
 
+        "title_p7": "API Call for Papers - Quarkus",
+        "desc_p7": "API desenvolvida com Quarkus para gerenciamento de submissões de artigos acadêmicos (call for papers). Utiliza PostgreSQL em container Docker, RestEasy para endpoints RESTful e Java 21. A API oferece funcionalidades completas de CRUD para gerenciar submissões, incluindo criação, listagem, busca por ID, atualização e exclusão de artigos. O projeto foi implantado na nuvem (Railway) para facilitar testes e demonstrações, e possui um cliente React para interação mais intuitiva.",
 
         "btnClose":"Fechar",
         "btnOpen_p": "Visite o projeto",
