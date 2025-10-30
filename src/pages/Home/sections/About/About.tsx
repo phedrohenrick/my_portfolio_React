@@ -1,16 +1,16 @@
-import styled from "@emotion/styled"
+import { styled, Box } from "@mui/material"
+import StyledCard from "portifolio/src/components/StyledCard/StyledCard"
 import Git from "portifolio/src/assets/images/ImageSkills/Git.png"
 import Docker from "portifolio/src/assets/images/ImageSkills/Docker.png"
 import Angular from "portifolio/src/assets/images/ImageSkills/Angular.png"
 import Spring from "portifolio/src/assets/images/ImageSkills/Spring.png"
 import Java from "portifolio/src/assets/images/ImageSkills/Java.png"
-import React from "portifolio/src/assets/images/ImageSkills/React.png"
-import typescript from "portifolio/src/assets/images/ImageSkills/Typescript.png"
-import c from "portifolio/src/assets/images/ImageSkills/C.png"
-import postgesql from "portifolio/src/assets/images/ImageSkills/PostgreSql.png"
+import ReactLogo from "portifolio/src/assets/images/ImageSkills/React.png"
+import TypescriptLogo from "portifolio/src/assets/images/ImageSkills/Typescript.png"
+import CLogo from "portifolio/src/assets/images/ImageSkills/C.png"
+import PostgresqlLogo from "portifolio/src/assets/images/ImageSkills/PostgreSql.png"
 import { Container, Grid, Typography } from "@mui/material";
 import AnimatedBackground from "portifolio/src/assets/images/AnimatedBackground/AboutBackground.gif";
-import StyledCard from "portifolio/src/components/StyledCard/StyledCard"
 import { Trans, useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
 
@@ -24,14 +24,7 @@ const {t} = useTranslation();
     
   }))
 
-  const StyledImg = styled("img")(() => ({
-    width: "135%",
-    borderRadius: "50%",
-    margin: "-70px",
-    '@media (max-width: 615px)': {
-      margin: "-30px",  // Altura menor para telas menores
-    },
-  }))
+
 
   
 
@@ -49,9 +42,9 @@ const {t} = useTranslation();
                 sm:bg-top 
                 md:bg-center 
                 lg:bg-bottom 
-                h-[120vh] 
                 w-full
-                pt-12">
+                overflow-x-hidden
+                py-12 md:py-16">
         <Container>
           <Grid container spacing={2} alignItems="center" gap={"40px"} >
 
@@ -122,19 +115,79 @@ const {t} = useTranslation();
               />
               </Typography>
             </Grid>
-            <Grid container justifyContent="center">
-  <Grid item xs={12} md={6}>
-    <StyledCard>
-      <Grid container justifyContent="center" alignItems="center" spacing={4} >
-        {[Git, Java, Angular, Spring, React, Docker, c, postgesql, typescript].map((imgSrc, index) => (
-          <Grid item xs={4} md={4} key={index} className="flex justify-center items-center">
-            <StyledImg src={imgSrc} alt={imgSrc.toString()} className="w-20 md:w-28 lg:w-32 xl:w-36 h-auto object-contain" />
-          </Grid>
-        ))}
-      </Grid>
-    </StyledCard>
-  </Grid>
-</Grid>
+            {/* Full-width band with two rows of icons: 5 on top, 4 on bottom */}
+            <Grid item xs={12} sx={{ mt: { xs: 2, md: 3 }, mb: { xs: 4, md: 6 } }}>
+              <Box sx={{ position: 'relative', left: '50%', right: '50%', ml: '-50vw', mr: '-50vw', width: '100vw', boxSizing: 'border-box' }}>
+                <StyledCard>
+                {(() => {
+                  const skills = [Git, Java, Angular, Spring, ReactLogo, Docker, CLogo, PostgresqlLogo, TypescriptLogo];
+                  const row1 = skills.slice(0, 5);
+                  const row2 = skills.slice(5);
+                  return (
+                    <>
+                      <Box
+                        sx={{
+                          display: 'grid',
+                          gridTemplateColumns: {
+                            xs: 'repeat(3, minmax(0, 1fr))',
+                            sm: 'repeat(4, minmax(0, 1fr))',
+                            md: 'repeat(5, minmax(0, 1fr))',
+                          },
+                          gap: { xs: 2, sm: 3, md: 4 },
+                          alignItems: 'center',
+                          justifyItems: 'center',
+                          mb: { xs: 2, md: 3 },
+                        }}
+                      >
+                        {row1.map((imgSrc, index) => (
+                          <Box key={`r1-${index}`} sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Box
+                              component="img"
+                              src={imgSrc}
+                              alt="skill"
+                              sx={{
+                                width: { xs: 110, sm: 140, md: 170, lg: 200 },
+                                height: 'auto',
+                                objectFit: 'contain',
+                              }}
+                            />
+                          </Box>
+                        ))}
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'grid',
+                          gridTemplateColumns: {
+                            xs: 'repeat(3, minmax(0, 1fr))',
+                            sm: 'repeat(4, minmax(0, 1fr))',
+                            md: 'repeat(4, minmax(0, 1fr))',
+                          },
+                          gap: { xs: 2, sm: 3, md: 4 },
+                          alignItems: 'center',
+                          justifyItems: 'center',
+                        }}
+                      >
+                        {row2.map((imgSrc, index) => (
+                          <Box key={`r2-${index}`} sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <Box
+                              component="img"
+                              src={imgSrc}
+                              alt="skill"
+                              sx={{
+                                width: { xs: 110, sm: 140, md: 170, lg: 200 },
+                                height: 'auto',
+                                objectFit: 'contain',
+                              }}
+                            />
+                          </Box>
+                        ))}
+                      </Box>
+                    </>
+                  );
+                })()}
+                </StyledCard>
+              </Box>
+            </Grid>
 
           </Grid>
         </Container>

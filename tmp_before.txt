@@ -10,30 +10,29 @@ const StyledCardSkill: React.FC<StyledCardSkillProps> = ({children}) =>{  //uma 
 
 
   const StyledCard = styled(Card)(({ }) => ({
-          backgroundColor: "rgba(1, 44, 50, 0.9)",
-          padding: "24px",
+          backgroundColor: "#d4e0e0",
+          padding: "40px",
           color: "#ffffff",
           borderRadius: "25px",
           boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
           width: "100%",  
-          maxWidth: "100%",
+          maxWidth: "500px",
           height: "auto",  
           display: "flex",
-          flexDirection: "column",
-          
+          flexDirection: "column",  
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",  
         
           '@media (max-width: 768px)': {
-            padding: "16px", // Reduz o padding para mais espaço interno
-            maxWidth: "100%"
+            padding: "20px", // Reduz o padding para mais espaço interno
+            maxWidth: "90%"
         },
     
         '@media (max-width: 480px)': {
-            padding: "12px", // Reduz ainda mais o padding
+            padding: "10px", // Reduz ainda mais o padding
             maxWidth: "100%",
-            
+            flexWrap: "wrap"  // Permite que os itens quebrem linha em telas pequenas
         },
           
         }));
@@ -49,6 +48,3 @@ const StyledCardSkill: React.FC<StyledCardSkillProps> = ({children}) =>{  //uma 
   
   export default StyledCardSkill
   
-
-
-
