@@ -92,38 +92,43 @@ import theme from "../../theme";
         i18nKey="title_p4"
        components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
-        description: "",
+        description: <Trans
+        i18nKey="desc_p4"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
+       />,
         imageUrl: "DownloadFiles/images/popscofe.png",
-        link: "https://github.com/phedrohenrick",
+        link: "https://priatoo.com.br",
         technologies:[
           "React",
-           "TypeScript", 
-           "JavaScript", 
-           "HTML", 
-           "CSS", 
+          "TypeScript",
+          "Context API",
           ],
-        isInDevelopment: true
+        isInDevelopment: false
       },
       {
         title: <Trans
-        i18nKey="title_p5"
+        i18nKey="title_p8"
        components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p5"
+        i18nKey="desc_p8"
        components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
-        imageUrl: "DownloadFiles/images/OBI.png",
-        link: "https://github.com/phedrohenrick/SistemaOBI",
+        imageUrl: "DownloadFiles/images/priatoo.png",
+        link: "https://priatoo.com.br",
         technologies:[
-           "Java",
-           "JavaSwing",
-           "postgreSQL",
-           "MVC",
+          "Java 21",
+          "Spring Boot",
+          "Spring Security",
+          "PostgreSQL",
+          "Docker",
+          "Nginx",
+          "Keycloak",
+          "React",
+          "TypeScript",
           ],
         isInDevelopment: false
-      },   
-
+      },
       {
         title: <Trans
         i18nKey="title_p6"

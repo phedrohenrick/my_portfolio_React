@@ -1,17 +1,43 @@
 {
     "translation":{
         "navBarAbout": "Sobre",
+        "navBarExperience": "Experiência",
         "navBarProjects": "Projetos",
-        "navBarContact": "Contato", 
-        "title": "Desenvolvedor web",
+        "navBarContact": "Contato",
+        "title": "Desenvolvedor Backend Java & Cloud",
         "btnChangeLanguage": "<1>PT</1>|EN",
         "btnCv": "Download do Currículo",
         "btnContact": "Contate-me",
 
         "aboutMe": "Sobre mim",
         "skills": "Habilidades",
-        "tx1": "Olá! Sou o <1> Phedro </1>, um <1>desenvolvedor web </1> apaixonado por tecnologia e inovação. Estou sempre em busca de aprender novas ferramentas e metodologias para oferecer aplicações modernas, responsivas e otimizadas.",
-        "tx2": "No <1>back-end</1>, foco em entregar soluções eficientes e escaláveis, utilizando as melhores práticas de desenvolvimento. No <1>front-end</1>, concentro meus estudos em garantir interfaces responsivas e elegantes.",
+        "tx1": "Olá! Sou o <1>Phedro</1>, <1>desenvolvedor backend Java</1> apaixonado por sistemas escaláveis e computação em nuvem. Atuo na Global Code — The Developer's Conference, construindo e sustentando sistemas de alto tráfego com Spring Boot, Quarkus e AWS.",
+        "tx2": "No <1>back-end</1>, trabalho com Java, Spring Boot, Quarkus e arquitetura de microsserviços com mensageria (Kafka), sempre com foco em performance e boas práticas. No <1>front-end</1>, utilizo React e TypeScript para complementar as soluções que construo.",
+
+        "title_exp": "Experiência Profissional",
+        "subtitle_exp": "Minha trajetória profissional em desenvolvimento",
+
+        "exp1_company": "Global Code — The Developer's Conference",
+        "exp1_role": "Desenvolvedor Backend Java",
+        "exp1_period": "Abril de 2025 — Atual",
+        "exp1_desc": "Atuo na construção e manutenção de módulos RESTful de alta disponibilidade para inscrições, pagamentos e gestão de membros, usando Java, Spring Boot e Quarkus. Participo de decisões de arquitetura e infraestrutura em nuvem AWS (ECS, ALB, CloudFormation, SQS, Lambda, S3), desenvolvi o sistema de totens de check-in do evento e trabalho em integrações estratégicas com ESummit e RDStation.",
+
+        "exp2_company": "Priatoo",
+        "exp2_role": "Desenvolvedor Full Stack — Projeto Autônomo",
+        "exp2_period": "Projeto autônomo",
+        "exp2_desc": "Atuei como engenheiro full stack em um SaaS de cardápio digital multi-tenant: backend em Java 21 e Spring Boot, com autenticação via Spring Security (OAuth2/JWT) e Keycloak, PostgreSQL e Nginx como proxy reverso via Docker Compose. No frontend, construí em React três frentes — landing de captação, cardápio digital do cliente e painel de gestão do lojista — com temas dinâmicos por tenant.",
+
+        "exp3_company": "Instituto Federal de Goiás (IFG)",
+        "exp3_role": "Monitor Java Backend — Programação Orientada a Objetos",
+        "exp3_period": "Dezembro de 2024 — Maio de 2025",
+        "exp3_desc": "Mentoria e suporte técnico a alunos em Java, Programação Orientada a Objetos e fundamentos de backend, conduzindo sessões práticas de codificação, projetos em equipe e orientação em testes automatizados e boas práticas de desenvolvimento.",
+
+        "exp4_company": "Telgo Telecom",
+        "exp4_role": "Analista de Suporte de Redes — Estágio",
+        "exp4_period": "Setembro de 2022 — Novembro de 2023",
+        "exp4_desc": "Monitoramento e suporte à infraestrutura de redes corporativas em ambiente NOC, com configuração de equipamentos (roteadores, wireless, fibra óptica) e acompanhamento contínuo com Zabbix e Grafana — a base que hoje sustenta minha atuação em sistemas backend.",
+
+        "btnVisitSite": "Visitar site",
 
         "title_p": "Projetos",
         "title_p1": "Meu portifólio",
@@ -26,16 +52,16 @@
         "desc_p3": "é uma aplicação frontend desenvolvida em Angular, voltada para o controle e monitoramento de estoques. A interface permite visualizar e gerenciar os itens de um inventário de forma intuitiva e eficiente. A aplicação conta com uma tela dedicada ao gerenciamento de produtos, onde é possível adicionar, editar, visualizar e remover itens, facilitando o acompanhamento do estoque em tempo real.",
 
         "title_p4": "Cardapio Digital",
-        "desc_p4": "Este projeto está em desenvolvimento",
-
-        "title_p5": "SistemaOBI",
-        "desc_p5": "Sistema de Gerenciamento para a Olimpíada Brasileira de Informática Projeto acadêmico, com intuito de explorar as bases teóricas do paradigma orientado a objetos e as ferramentas do Java, desenvolvido para desktop com foco no gerenciamento de alunos participantes da OBI. Permite funcionalidades como cadastro, edição, exclusão e visualização de dados. Construído com integração ao banco de dados PostgreSQL, destaca-se por sua interface intuitiva e praticidade no gerenciamento de informações. Um exemplo prático de aplicação de conceitos de desenvolvimento de software e manipulação de banco de dados.",
+        "desc_p4": "Demonstração do cardápio digital do cliente final da Priatoo, para o restaurante fictício POP's Coffé — com identidade visual (cores, logo) por tenant e navegação intuitiva de categorias e produtos, construído em React com estado por tenant via Context API.",
 
         "title_p6": "Backend Mineradora com Quarkus",
         "desc_p6": "Aqui, desenvolvo o backend para um sistema de uma mineradora com o intuito de explorar o Quarkus Framework e a mensageria com Kafka. Nesse sistema, adoto a arquitetura de microserviços, que se comunicam via REST e mensageria, em uma abordagem híbrida. O sistema é composto por quatro microserviços: um gerencia as autenticações, outro consulta a cotação atual do dólar por meio de uma API externa, o terceiro administra as propostas de compra dos clientes, e o quarto envia essas propostas para os analistas junto a cotação do dólar do dia. Os dados para o microserviço de propostas são recebidos via eventos do Kafka, enviados pelo segundo e terceiro microserviços. Venha conhecer mais!",
 
         "title_p7": "API Call for Papers - Quarkus",
         "desc_p7": "API desenvolvida com Quarkus para gerenciamento de submissões de artigos acadêmicos (call for papers). Utiliza PostgreSQL em container Docker, RestEasy para endpoints RESTful e Java 21. A API oferece funcionalidades completas de CRUD para gerenciar submissões, incluindo criação, listagem, busca por ID, atualização e exclusão de artigos. O projeto foi implantado na nuvem (Railway) para facilitar testes e demonstrações, e possui um cliente React para interação mais intuitiva.",
+
+        "title_p8": "Priatoo",
+        "desc_p8": "SaaS de cardápio digital multi-tenant que desenvolvi do zero, do backend ao frontend. Backend em Java 21 e Spring Boot, com autenticação via Spring Security (OAuth2/JWT) e Keycloak, PostgreSQL e Nginx como proxy reverso via Docker Compose. O frontend em React cobre três frentes: a landing de captação de clientes, o cardápio digital do cliente final e o painel de gestão do lojista.",
 
         "btnClose":"Fechar",
         "btnOpen_p": "Visite o projeto",

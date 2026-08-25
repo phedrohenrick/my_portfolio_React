@@ -1,17 +1,43 @@
 {
     "translation":{
         "navBarAbout": "About",
+        "navBarExperience": "Experience",
         "navBarProjects": "Projects",
-        "navBarContact": "Contact", 
-        "title": "Web Developer",
+        "navBarContact": "Contact",
+        "title": "Backend Java & Cloud Developer",
         "btnChangeLanguage": "PT|<1>EN</1>",
         "btnCv": "Download CV",
         "btnContact": "Contact",
 
         "aboutMe": "About Me",
         "skills": "Skills",
-        "tx1": "Hello! I'm <1>Phedro</1>, a <1>web developer</1> passionate about technology and innovation. I am always seeking to learn new tools and methodologies to deliver modern, responsive, and optimized applications.",
-        "tx2": "On the <1>back end</1>, I focus on delivering efficient and scalable solutions, using the best development practices. On the <1>front end</1>, I concentrate my efforts on ensuring responsive and elegant interfaces.",
+        "tx1": "Hello! I'm <1>Phedro</1>, a <1>Java backend developer</1> passionate about scalable systems and cloud computing. I work at Global Code — The Developer's Conference, building and maintaining high-traffic systems with Spring Boot, Quarkus, and AWS.",
+        "tx2": "On the <1>back end</1>, I work with Java, Spring Boot, Quarkus, and microservices architecture with messaging (Kafka), always focused on performance and best practices. On the <1>front end</1>, I use React and TypeScript to complement the solutions I build.",
+
+        "title_exp": "Professional Experience",
+        "subtitle_exp": "My professional journey in software development",
+
+        "exp1_company": "Global Code — The Developer's Conference",
+        "exp1_role": "Backend Java Developer",
+        "exp1_period": "April 2025 — Present",
+        "exp1_desc": "I build and maintain high-availability RESTful modules for registrations, payments, and member management using Java, Spring Boot, and Quarkus. I take part in architecture and AWS infrastructure decisions (ECS, ALB, CloudFormation, SQS, Lambda, S3), built the event's self check-in kiosk system, and work on strategic integrations with ESummit and RDStation.",
+
+        "exp2_company": "Priatoo",
+        "exp2_role": "Full Stack Developer — Independent Project",
+        "exp2_period": "Independent project",
+        "exp2_desc": "I worked as a full stack engineer on a multi-tenant digital menu SaaS: Java 21 and Spring Boot backend with Spring Security (OAuth2/JWT) authentication and Keycloak, PostgreSQL, and Nginx as a reverse proxy via Docker Compose. On the frontend, I built three fronts in React — the marketing landing page, the customer-facing digital menu, and the shop owner's management panel — with dynamic per-tenant theming.",
+
+        "exp3_company": "Instituto Federal de Goiás (IFG)",
+        "exp3_role": "Java Backend Teaching Assistant — OOP",
+        "exp3_period": "December 2024 — May 2025",
+        "exp3_desc": "Mentored and supported students in Java, Object-Oriented Programming, and backend fundamentals, leading hands-on coding sessions, team projects, and guidance on automated testing and development best practices.",
+
+        "exp4_company": "Telgo Telecom",
+        "exp4_role": "Network Support Analyst — Internship",
+        "exp4_period": "September 2022 — November 2023",
+        "exp4_desc": "Monitored and supported corporate network infrastructure in a NOC environment, configuring equipment (routers, wireless, fiber optics) and tracking uptime with Zabbix and Grafana — the foundation that today supports my work on backend systems.",
+
+        "btnVisitSite": "Visit site",
 
         "title_p": "Projects",
         "title_p1": "My Portfolio",
@@ -25,16 +51,16 @@
         "desc_p3": "This is a frontend application developed in Angular, aimed at controlling and monitoring inventories. The interface allows for intuitive and efficient management of inventory items. The application includes a dedicated screen for product management, enabling users to add, edit, view, and delete items, making real-time inventory tracking easier.",
     
         "title_p4": "Digital Menu",
-        "desc_p4": "This project is under development.",
+        "desc_p4": "Demo of Priatoo's customer-facing digital menu, for the fictional restaurant POP's Coffé — with per-tenant visual identity (colors, logo) and intuitive category and product browsing, built in React with per-tenant state via Context API.",
     
-        "title_p5": "OBI System",
-        "desc_p5": "Management System for the Brazilian Olympiad in Informatics. An academic project aimed at exploring the theoretical foundations of the object-oriented paradigm and Java tools, developed for desktop use with a focus on managing students participating in the OBI. It provides functionalities such as registration, editing, deletion, and viewing of data. Built with PostgreSQL database integration, it stands out for its intuitive interface and practicality in managing information. A practical example of applying software development concepts and database manipulation.",
-        
         "title_p6": "Mining Backend with Quarkus",
         "desc_p6": "Here, I develop the backend for a mining company system with the aim of exploring the Quarkus Framework and messaging with Kafka. In this system, I adopt a microservices architecture that communicates via REST and messaging in a hybrid approach. The system consists of four microservices: one manages authentications, another queries the current dollar exchange rate through an external API, the third manages customer purchase proposals, and the fourth sends these proposals to analysts along with the day's dollar exchange rate. The data for the proposal microservice is received via Kafka events, sent by the second and third microservices. Come learn more!",
         
         "title_p7": "API Call for Papers - Quarkus",
         "desc_p7": "API developed with Quarkus for managing academic paper submissions (call for papers). Uses PostgreSQL in Docker container, RestEasy for RESTful endpoints, and Java 21. The API offers complete CRUD functionality for managing submissions, including creation, listing, search by ID, updating, and deletion of articles. The project was deployed in the cloud (Railway) to facilitate testing and demonstrations, and has a React client for more intuitive interaction.",
+
+        "title_p8": "Priatoo",
+        "desc_p8": "Multi-tenant digital menu SaaS I built from the ground up, from backend to frontend. Java 21 and Spring Boot backend, with authentication via Spring Security (OAuth2/JWT) and Keycloak, PostgreSQL, and Nginx as a reverse proxy via Docker Compose. The React frontend covers three fronts: the customer-acquisition landing page, the customer-facing digital menu, and the shop owner's management panel.",
 
         "btnClose": "Close",
         "btnOpen_p": "Visit the project",

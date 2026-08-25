@@ -33,6 +33,15 @@ const NavBar = () =>{  //uma notação diferente para function
                 </MenuItem>
 
                 <MenuItem >
+                <Link to="experiences" smooth={true} duration={250}>
+
+               < Typography variant="h5">
+                {t("navBarExperience")}
+              </Typography>
+                </Link>
+                </MenuItem>
+
+                <MenuItem >
                 <Link to="projetos" smooth={true} duration={200}>
                 < Typography variant="h5">
                 {t("navBarProjects")}
