@@ -1,18 +1,19 @@
 import { styled, Box } from "@mui/material"
-import StyledCard from "portifolio/src/components/StyledCard/StyledCard"
-import Git from "portifolio/src/assets/images/ImageSkills/Git.png"
-import Docker from "portifolio/src/assets/images/ImageSkills/Docker.png"
-import Angular from "portifolio/src/assets/images/ImageSkills/Angular.png"
-import Spring from "portifolio/src/assets/images/ImageSkills/Spring.png"
-import Java from "portifolio/src/assets/images/ImageSkills/Java.png"
-import ReactLogo from "portifolio/src/assets/images/ImageSkills/React.png"
-import TypescriptLogo from "portifolio/src/assets/images/ImageSkills/Typescript.png"
-import CLogo from "portifolio/src/assets/images/ImageSkills/C.png"
-import PostgresqlLogo from "portifolio/src/assets/images/ImageSkills/PostgreSql.png"
+import StyledCard from "../../../../components/StyledCard/StyledCard"
+import Git from "../../../../assets/images/ImageSkills/Git.png"
+import Docker from "../../../../assets/images/ImageSkills/Docker.png"
+import Angular from "../../../../assets/images/ImageSkills/Angular.png"
+import Spring from "../../../../assets/images/ImageSkills/Spring.png"
+import Java from "../../../../assets/images/ImageSkills/Java.png"
+import ReactLogo from "../../../../assets/images/ImageSkills/React.png"
+import TypescriptLogo from "../../../../assets/images/ImageSkills/Typescript.png"
+import CLogo from "../../../../assets/images/ImageSkills/C.png"
+import PostgresqlLogo from "../../../../assets/images/ImageSkills/PostgreSql.png"
 import { Container, Grid, Typography } from "@mui/material";
-import AnimatedBackground from "portifolio/src/assets/images/AnimatedBackground/AboutBackground.gif";
+import AnimatedBackground from "../../../../assets/images/AnimatedBackground/AboutBackground.gif";
 import { Trans, useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
+import theme from "../../../../theme"
 
 
 const About = () => { //uma notação diferente para function 
@@ -77,7 +78,7 @@ const {t} = useTranslation();
 
               <Trans
                i18nKey="tx1" 
-              components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+              components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
               />
 
                 </Typography>
@@ -100,7 +101,7 @@ const {t} = useTranslation();
               <Typography variant="body1" color="primary" textAlign="left" pb={2} fontWeight={"bold"} marginTop={"-40px"} > 
               <Trans
                i18nKey="tx2" 
-              components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+              components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
               />
 
                  </Typography>

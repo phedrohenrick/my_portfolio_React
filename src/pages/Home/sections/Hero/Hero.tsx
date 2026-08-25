@@ -1,4 +1,4 @@
-import Avatar from "../../../../assets/images/Avatar.png";
+import Avatar from "../../../../assets/images/Avatar1.png";
 import {Box, Container, Grid, styled, Typography } from "@mui/material";
 import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
@@ -12,6 +12,7 @@ import { IconButton } from '@mui/material';
 import { motion } from "framer-motion";
 import { Trans, useTranslation } from 'react-i18next'
 import { useState } from "react";
+import theme from "../../../../theme";
 
 
 const Hero = () => {
@@ -99,7 +100,7 @@ const Hero = () => {
             >
               <Trans
                 i18nKey="btnChangeLanguage" 
-                components={{ 1: <span style={{color: "#E67E22"}}/>}} 
+                components={{ 1: <span style={{color: theme.palette.accent.main}}/>}}
               />
             </button>
           </Grid>

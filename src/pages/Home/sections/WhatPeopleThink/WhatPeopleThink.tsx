@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import rafa from "../../../../assets/images/rafa.jpg";
 import adriano from "../../../../assets/images/adriano.jpg";
 import { Trans, useTranslation } from 'react-i18next'
+import theme from "../../../../theme"
 
 
 
@@ -47,7 +48,7 @@ const WhatPeopleThink = () =>{ //uma notação diferente para function
              <Typography variant="h5" color = "primary" className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold">
                     <Trans
                           i18nKey="personal_title_Rafa" 
-                        components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+                        components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
                         />
                 </Typography>
               </div>
@@ -61,8 +62,8 @@ const WhatPeopleThink = () =>{ //uma notação diferente para function
               className="text-md sm:text-lg md:text-xl lg:text-7xl text-left sm:text-center mt-4 mr-6 ">
               <Typography variant = "h6" color = "primary"  textAlign="left" >
                   <Trans
-                      i18nKey="personal_review_R" 
-                    components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+                      i18nKey="personal_review_R"
+                    components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
                     />
               </Typography >
               </motion.div>
@@ -78,8 +79,8 @@ const WhatPeopleThink = () =>{ //uma notação diferente para function
 
           <Typography variant="h5" className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
           <Trans
-          i18nKey="personal_title_Adriano" 
-         components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+          i18nKey="personal_title_Adriano"
+         components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
          />
           </Typography>
         </div>
@@ -94,8 +95,8 @@ const WhatPeopleThink = () =>{ //uma notação diferente para function
                 className="text-md sm:w-[65%] lg:w-[55%] sm:text-lg md:text-xl lg:text-2xl text-center sm:text-right mt-4 max-w-full sm:max-w-[90%] md:max-w-[80%] ml-6">
             <Typography variant='h6' color = "primary"  textAlign="right">
             <Trans
-          i18nKey="personal_review_A" 
-         components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+          i18nKey="personal_review_A"
+         components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
          />
             </Typography>
           </motion.div >

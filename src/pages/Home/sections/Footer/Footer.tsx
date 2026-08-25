@@ -7,7 +7,8 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 import { downloadFile } from "../../../../components/Functions/DownloadFile";
 import { Trans, useTranslation } from 'react-i18next'
- 
+import theme from "../../../../theme"
+
 
 const Footer = () =>{ //uma notação diferente para function 
 
@@ -54,7 +55,7 @@ const {t} = useTranslation();
                             <Typography variant="h6" color="primary" fontWeight="bold" style={{ textDecoration: 'underline', cursor: 'pointer',}} paddingTop = {"20px"}>
                             <Trans
                                 i18nKey="btnCv" 
-                              components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+                              components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
                               />
                               <DownloadForOfflineIcon color= "primary" sx={{ fontSize: 80, ml: 2 }} />
 

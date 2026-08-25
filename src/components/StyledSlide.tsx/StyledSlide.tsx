@@ -9,6 +9,7 @@ import { t } from "i18next";
 import { Autoplay, Navigation } from 'swiper/modules';
 import '../../../src/App.css';
 import { Typography } from "@mui/material";
+import theme from "../../theme";
 
 
     const projectList: ProjectsInterface[] = [
@@ -16,14 +17,14 @@ import { Typography } from "@mui/material";
       {
           title:  
           <Trans
-          i18nKey="title_p1" 
-         components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+          i18nKey="title_p1"
+         components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
          />
          ,
           description: 
           <Trans
-          i18nKey="desc_p1" 
-         components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+          i18nKey="desc_p1"
+         components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
          />
          ,
           imageUrl: "DownloadFiles/images/portifolio.png",
@@ -42,12 +43,12 @@ import { Typography } from "@mui/material";
 
       {
         title: <Trans
-        i18nKey="title_p2" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p2"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p2" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="desc_p2"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         imageUrl: "DownloadFiles/images/api.png",
         link: "https://github.com/phedrohenrick/Spring_webCrude",
@@ -64,12 +65,12 @@ import { Typography } from "@mui/material";
 
       {
         title: <Trans
-        i18nKey="title_p3" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p3"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p3" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="desc_p3"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         imageUrl: "DownloadFiles/images/dashboard.png",
         link: "https://github.com/phedrohenrick/Angular_webCrud",
@@ -88,8 +89,8 @@ import { Typography } from "@mui/material";
       },   
       {
         title: <Trans
-        i18nKey="title_p4" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p4"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: "",
         imageUrl: "DownloadFiles/images/popscofe.png",
@@ -105,12 +106,12 @@ import { Typography } from "@mui/material";
       },
       {
         title: <Trans
-        i18nKey="title_p5" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p5"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p5" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="desc_p5"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         imageUrl: "DownloadFiles/images/OBI.png",
         link: "https://github.com/phedrohenrick/SistemaOBI",
@@ -125,12 +126,12 @@ import { Typography } from "@mui/material";
 
       {
         title: <Trans
-        i18nKey="title_p6" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p6"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p6" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="desc_p6"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         imageUrl: "DownloadFiles/images/inDevelopment.png",
         link: "https://github.com/phedrohenrick/cotacao_microservice_quarkus",
@@ -149,12 +150,12 @@ import { Typography } from "@mui/material";
       
       {
         title: <Trans
-        i18nKey="title_p7" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="title_p7"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         description: <Trans
-        i18nKey="desc_p7" 
-       components={{ 1:  <span style= {{color: "#E67E22"}}/>}} 
+        i18nKey="desc_p7"
+       components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
        />,
         imageUrl: "DownloadFiles/images/api_Quarkus.png",
         link: "https://github.com/phedrohenrick/API_call_for_papers-Quarkus",
@@ -305,7 +306,7 @@ import { Typography } from "@mui/material";
                     )}
                     <div className="flex justify-center space-x-[-0.5rem]">
                       <motion.button
-                        className="m-5 px-5 py-2.5 bg-[#8ca0a2] text-white border-none rounded-full cursor-pointer text-base "
+                        className="m-5 px-5 py-2.5 bg-muted text-white border-none rounded-full cursor-pointer text-base "
                         onClick={() => setSelectedId(null)}
                       >
                         {t("btnClose")}
@@ -313,7 +314,7 @@ import { Typography } from "@mui/material";
                       <motion.a
                         target="_blank"
                         onClick={() => HandleClick(projectList[selectedId]?.link)}
-                        className="m-5 px-5 py-2.5 bg-[#E67E22] text-white border-none rounded-full cursor-pointer text-base"
+                        className="m-5 px-5 py-2.5 bg-accent text-white border-none rounded-full cursor-pointer text-base"
                       >
                        {t("btnOpen_p")}
                       </motion.a>
