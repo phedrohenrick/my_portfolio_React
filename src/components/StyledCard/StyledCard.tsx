@@ -13,7 +13,7 @@ const StyledCardSkill: React.FC<StyledCardSkillProps> = ({children}) =>{  //uma 
           backgroundColor: "rgba(1, 44, 50, 1)",
           padding: "24px",
           color: "#ffffff",
-          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          boxShadow: "0 16px 16px rgba(0, 0, 0, 0.2)",
           width: "100%",  
           maxWidth: "100%",
           height: "auto",  
