@@ -32,6 +32,7 @@ export const toolbox: ToolGroup[] = [
   { name: { pt: "Cloud", en: "Cloud" }, tags: ["aws", "ecs", "sqs", "lambda", "cloudformation", "docker", "nginx"] },
   { name: { pt: "Dados", en: "Data" }, tags: ["postgresql", "jpa", "hibernate"] },
   { name: { pt: "Front", en: "Front" }, tags: ["react", "typescript", "angular", "tailwind"] },
+  { name: { pt: "Ferramentas & Segurança", en: "Tools & Security" }, tags: ["github", "security"] },
 ];
 
 // Nuvem de tecnologias ao lado da caixa de ferramentas. size: 3 = maior, 1 = menor.
@@ -53,4 +54,6 @@ export const techCloud: TechLogo[] = [
   { name: "Hibernate", logo: "/images/tech/hibernate.svg", size: 1 },
   { name: "Angular", logo: "/images/tech/angular.svg", size: 1 },
   { name: "Tailwind CSS", logo: "/images/tech/tailwind.svg", size: 1 },
+  { name: "GitHub", logo: "/images/tech/github.svg", size: 2 },
+  { name: "Segurança", logo: "/images/tech/security.svg", size: 1 },
 ];
