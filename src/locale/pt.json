@@ -1,81 +1,70 @@
 {
-    "translation":{
-        "navBarAbout": "Sobre",
-        "navBarExperience": "Experiência",
-        "navBarProjects": "Projetos",
-        "navBarContact": "Contato",
-        "title": "Desenvolvedor Backend Java & Cloud",
-        "btnChangeLanguage": "<1>PT</1>|EN",
-        "btnCv": "Download do Currículo",
-        "btnContact": "Contate-me",
+  "translation": {
+    "logoAria": "Phedro Henrick, início",
+    "langAria": "Mudar idioma",
+    "heroGreeting": "Oi! Eu sou o",
+    "heroRole": "dev backend java · cloud",
+    "heroPitch": "Hoje construo os sistemas do **TDC** na **Global Code**.",
+    "heroTerminal": "construindo sistemas escaláveis com java e aws",
+    "heroPhotoAlt": "Retrato de Phedro Henrick",
+    "btnCv": "Currículo",
+    "btnContact": "Contato",
+    "coords": "Goiânia · 16°40'S 49°15'W",
 
-        "aboutMe": "Sobre mim",
-        "skills": "Habilidades",
-        "tx1": "Olá! Sou o <1>Phedro</1>, <1>desenvolvedor backend Java</1> apaixonado por sistemas escaláveis e computação em nuvem. Atuo na Global Code — The Developer's Conference, construindo e sustentando sistemas de alto tráfego com Spring Boot, Quarkus e AWS.",
-        "tx2": "No <1>back-end</1>, trabalho com Java, Spring Boot, Quarkus e arquitetura de microsserviços com mensageria (Kafka), sempre com foco em performance e boas práticas. No <1>front-end</1>, utilizo React e TypeScript para complementar as soluções que construo.",
+    "aboutComment": "// 02 — sobre",
+    "aboutTitle": "Sobre mim",
+    "nowLabel": "agora",
+    "nowWorking": "trabalhando em:",
+    "nowNext": "próximo passo:",
+    "learningTitle": "Como me atualizo",
+    "learningSubtitle": "Onde estudo e de onde vem meu roadmap.",
+    "toolboxTitle": "Caixa de ferramentas",
 
-        "title_exp": "Experiência Profissional",
-        "subtitle_exp": "Minha trajetória profissional em desenvolvimento",
+    "expComment": "// 03 — experiência",
+    "expTitle": "Minha rota até aqui",
+    "expSubtitle": "Do suporte de redes ao backend que roda o TDC.",
+    "btnVisitSite": "visitar site",
 
-        "exp1_company": "Global Code — The Developer's Conference",
-        "exp1_role": "Desenvolvedor Backend Java",
-        "exp1_period": "Abril de 2025 — Atual",
-        "exp1_desc": "Atuo na construção e manutenção de módulos RESTful de alta disponibilidade para inscrições, pagamentos e gestão de membros, usando Java, Spring Boot e Quarkus. Participo de decisões de arquitetura e infraestrutura em nuvem AWS (ECS, ALB, CloudFormation, SQS, Lambda, S3), desenvolvi o sistema de totens de check-in do evento e trabalho em integrações estratégicas com ESummit e RDStation.",
+    "projComment": "// 04 — projetos",
+    "projTitle": "O que construí",
+    "projSubtitle": "Projetos pessoais e profissionais.",
+    "projFeatured": "destaque",
+    "projInDev": "em desenvolvimento",
+    "projRepo": "código",
+    "projDemo": "ver online",
+    "readMore": "ler mais",
+    "readLess": "ler menos",
 
-        "exp2_company": "Priatoo",
-        "exp2_role": "Desenvolvedor Full Stack — Projeto Autônomo",
-        "exp2_period": "Projeto autônomo",
-        "exp2_desc": "Atuei como engenheiro full stack em um SaaS de cardápio digital multi-tenant: backend em Java 21 e Spring Boot, com autenticação via Spring Security (OAuth2/JWT) e Keycloak, PostgreSQL e Nginx como proxy reverso via Docker Compose. No frontend, construí em React três frentes — landing de captação, cardápio digital do cliente e painel de gestão do lojista — com temas dinâmicos por tenant.",
+    "achComment": "// 05 — conquistas",
+    "achTitle": "Conquistas",
+    "achSubtitle": "Marcos que me trouxeram até aqui.",
 
-        "exp3_company": "Instituto Federal de Goiás (IFG)",
-        "exp3_role": "Monitor Java Backend — Programação Orientada a Objetos",
-        "exp3_period": "Dezembro de 2024 — Maio de 2025",
-        "exp3_desc": "Mentoria e suporte técnico a alunos em Java, Programação Orientada a Objetos e fundamentos de backend, conduzindo sessões práticas de codificação, projetos em equipe e orientação em testes automatizados e boas práticas de desenvolvimento.",
+    "shelfComment": "// 06 — estante",
+    "shelfTitle": "Estante",
+    "shelfSubtitle": "O que leio e assisto.",
+    "shelfBooks": "Livros",
+    "shelfChannels": "Canais do YouTube",
+    "shelfArticles": "Artigos",
+    "statusRead": "lido",
+    "statusReading": "lendo",
 
-        "exp4_company": "Telgo Telecom",
-        "exp4_role": "Analista de Suporte de Redes — Estágio",
-        "exp4_period": "Setembro de 2022 — Novembro de 2023",
-        "exp4_desc": "Monitoramento e suporte à infraestrutura de redes corporativas em ambiente NOC, com configuração de equipamentos (roteadores, wireless, fibra óptica) e acompanhamento contínuo com Zabbix e Grafana — a base que hoje sustenta minha atuação em sistemas backend.",
+    "recComment": "// 07 — recomendações",
+    "recTitle": "O que dizem sobre mim",
+    "recSubtitle": "Comentários de quem já trabalhou comigo, direto do LinkedIn.",
+    "recViewLinkedin": "ver no LinkedIn",
 
-        "btnVisitSite": "Visitar site",
+    "contactComment": "// 08 — contato",
+    "contactTitle": "Mande um sinal",
+    "contactSubtitle": "Vamos conversar? Escolha o canal que preferir.",
+    "contactEmail": "E-mail",
+    "contactWhatsapp": "WhatsApp",
+    "contactCv": "Baixar currículo",
+    "footerNote": "feito com react, tailwind e muita água salgada",
+    "footerRights": "Todos os direitos reservados.",
 
-        "title_p": "Projetos",
-        "title_p1": "Meu portifólio",
-        "desc_p1": "Este portfólio é uma aplicação estática desenvolvida em React para exibir meus projetos e habilidades como desenvolvedor full stack. Com uma navegação fluida por meio de âncoras e um design moderno e responsivo, o site tem como objetivo fornecer uma visão clara e objetiva das minhas competências técnicas e realizações em projetos pessoais e profissionais.",
-        "technology":" Tecnologias: ",
-
-        "title_p2": "Spring Rest Api",
-        "desc_p2": "Este projeto consiste em uma API RESTful desenvolvida com Spring Boot, oferecendo operações CRUD (Create, Read, Update, Delete) para o gerenciamento de recursos. A API foi projetada para ser escalável, de fácil manutenção e com foco na eficiência, utilizando as melhores práticas de desenvolvimento backend.",
-
-
-        "title_p3": "Estoque",
-        "desc_p3": "é uma aplicação frontend desenvolvida em Angular, voltada para o controle e monitoramento de estoques. A interface permite visualizar e gerenciar os itens de um inventário de forma intuitiva e eficiente. A aplicação conta com uma tela dedicada ao gerenciamento de produtos, onde é possível adicionar, editar, visualizar e remover itens, facilitando o acompanhamento do estoque em tempo real.",
-
-        "title_p4": "Cardapio Digital",
-        "desc_p4": "Demonstração do cardápio digital do cliente final da Priatoo, para o restaurante fictício POP's Coffé — com identidade visual (cores, logo) por tenant e navegação intuitiva de categorias e produtos, construído em React com estado por tenant via Context API.",
-
-        "title_p6": "Backend Mineradora com Quarkus",
-        "desc_p6": "Aqui, desenvolvo o backend para um sistema de uma mineradora com o intuito de explorar o Quarkus Framework e a mensageria com Kafka. Nesse sistema, adoto a arquitetura de microserviços, que se comunicam via REST e mensageria, em uma abordagem híbrida. O sistema é composto por quatro microserviços: um gerencia as autenticações, outro consulta a cotação atual do dólar por meio de uma API externa, o terceiro administra as propostas de compra dos clientes, e o quarto envia essas propostas para os analistas junto a cotação do dólar do dia. Os dados para o microserviço de propostas são recebidos via eventos do Kafka, enviados pelo segundo e terceiro microserviços. Venha conhecer mais!",
-
-        "title_p7": "API Call for Papers - Quarkus",
-        "desc_p7": "API desenvolvida com Quarkus para gerenciamento de submissões de artigos acadêmicos (call for papers). Utiliza PostgreSQL em container Docker, RestEasy para endpoints RESTful e Java 21. A API oferece funcionalidades completas de CRUD para gerenciar submissões, incluindo criação, listagem, busca por ID, atualização e exclusão de artigos. O projeto foi implantado na nuvem (Railway) para facilitar testes e demonstrações, e possui um cliente React para interação mais intuitiva.",
-
-        "title_p8": "Priatoo",
-        "desc_p8": "SaaS de cardápio digital multi-tenant que desenvolvi do zero, do backend ao frontend. Backend em Java 21 e Spring Boot, com autenticação via Spring Security (OAuth2/JWT) e Keycloak, PostgreSQL e Nginx como proxy reverso via Docker Compose. O frontend em React cobre três frentes: a landing de captação de clientes, o cardápio digital do cliente final e o painel de gestão do lojista.",
-
-        "btnClose":"Fechar",
-        "btnOpen_p": "Visite o projeto",
-
-        "title_wpt":"O que as pessoas pensam sobre mim?",
-        "personal_title_Rafa":"<1>Rafael Xavier</1> - Analista de Redes",
-        "personal_review_R": " Trabalhar com o Phedro foi uma experiência excelente. Mostra seu comprometimento com o aprendizado contínuo. A dedicação e a busca por aprimoramento são características marcantes, e tenho certeza de que ele continuará evoluindo em todas as áreas. É inspirador acompanhar sua trajetória!",
-        "personal_title_Adriano":"<1>Adriano Aparecido</1> - Automação Industrial",
-        "personal_review_A": " O Phedro demonstra conhecimento técnico em diversas áreas da tecnologia, sempre abordando cada desafio com precisão e clareza. Ele está sempre em busca de novas formas de otimizar processos e superar expectativas, mostrando comprometimento e paixão pelo que faz. Sua capacidade de aprendizado contínuo e aplicação prática reflete seu empenho em alcançar a excelência em cada projeto."
-        
-        , "message": "Mande-me uma mensagem"
-
-
-
-    }
-
+    "lightboxClose": "Fechar imagem",
+    "photosAria": "Fotos, role para o lado",
+    "photosPrev": "Fotos anteriores",
+    "photosNext": "Próximas fotos"
+  }
 }

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 interface TypingEffectProps {
@@ -7,34 +7,34 @@ interface TypingEffectProps {
   speed?: number;
 }
 
-const TypingEffect: React.FC<TypingEffectProps> = ({ 
-  text, 
-  delay = 0, 
-  speed = 50 
-}) => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+const TypingEffect: React.FC<TypingEffectProps> = ({ text, delay = 0, speed = 50 }) => {
+  const reduce = useReducedMotion();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }
-    }, currentIndex === 0 ? delay : speed);
+    setCount(0);
+  }, [text]);
 
+  useEffect(() => {
+    if (reduce || count >= text.length) return;
+    const timer = setTimeout(() => setCount((c) => c + 1), count === 0 ? delay : speed);
     return () => clearTimeout(timer);
-  }, [currentIndex, text, delay, speed]);
+  }, [count, text, delay, speed, reduce]);
+
+  const shown = reduce ? text : text.slice(0, count);
 
   return (
-    <span>
-      {displayedText}
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
-      >
-        |
-      </motion.span>
+    <span aria-label={text}>
+      <span aria-hidden="true">{shown}</span>
+      {!reduce && (
+        <motion.span
+          aria-hidden="true"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+        >
+          |
+        </motion.span>
+      )}
     </span>
   );
 };

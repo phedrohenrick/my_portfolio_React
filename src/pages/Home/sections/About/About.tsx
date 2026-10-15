@@ -1,202 +1,103 @@
-import { styled, Box } from "@mui/material"
-import StyledCard from "../../../../components/StyledCard/StyledCard"
-import Git from "../../../../assets/images/ImageSkills/Git.png"
-import Docker from "../../../../assets/images/ImageSkills/Docker.png"
-import Angular from "../../../../assets/images/ImageSkills/Angular.png"
-import Spring from "../../../../assets/images/ImageSkills/Spring.png"
-import Java from "../../../../assets/images/ImageSkills/Java.png"
-import ReactLogo from "../../../../assets/images/ImageSkills/React.png"
-import TypescriptLogo from "../../../../assets/images/ImageSkills/Typescript.png"
-import CLogo from "../../../../assets/images/ImageSkills/C.png"
-import PostgresqlLogo from "../../../../assets/images/ImageSkills/PostgreSql.png"
-import { Container, Grid, Typography } from "@mui/material";
-import AnimatedBackground from "../../../../assets/images/AnimatedBackground/AboutBackground.gif";
-import { Trans, useTranslation } from 'react-i18next'
-import { motion } from "framer-motion"
-import theme from "../../../../theme"
+import { useTranslation } from "react-i18next";
+import Card from "../../../../components/ui/Card";
+import LinkCard from "../../../../components/ui/LinkCard";
+import Reveal from "../../../../components/ui/Reveal";
+import Rich from "../../../../components/ui/Rich";
+import SectionHeader from "../../../../components/ui/SectionHeader";
+import Tag from "../../../../components/ui/Tag";
+import { aboutParagraphs, aboutPhoto, nowBlock, toolbox } from "../../../../data/about";
+import { learningFootnote, learningItems } from "../../../../data/learning";
+import { useLocalized } from "../../../../hooks/useLocalized";
 
+const toneCycle = ["seaglass", "tide", "lagoon", "seafoam"] as const;
 
-const About = () => { //uma notação diferente para function 
-
-const {t} = useTranslation();
-  
-  const StyledAbout = styled("div")(({ }) => ({
-    backgroundImage: `url(${AnimatedBackground})`,
-    
-  }))
-
-
-
-  
-
+const About = () => {
+  const { t } = useTranslation();
+  const { l } = useLocalized();
 
   return (
-    <>
+    <section id="sobre" className="mx-auto w-full max-w-6xl px-4 md:px-8 py-16 md:py-24">
+      <Reveal>
+        <SectionHeader comment={t("aboutComment")} title={t("aboutTitle")} />
+        <div className="space-y-4 font-mono text-base leading-8 text-abyss">
+          {aboutParagraphs.map((p, i) => (
+            <p key={i}>
+              <Rich text={l(p)} />
+            </p>
+          ))}
+        </div>
+      </Reveal>
 
-      <StyledAbout id="sobre" className="
-                flex
-                items-top
-                justify-center
-                bg-cover 
-                bg-no-repeat 
-                bg-center 
-                sm:bg-top 
-                md:bg-center 
-                lg:bg-bottom 
-                w-full
-                overflow-x-hidden
-                py-12 md:py-16">
-        <Container>
-          <Grid container spacing={2} alignItems="center" gap={"40px"} >
+      <Reveal className="mt-8">
+        <Card className="p-5">
+          <p className="flex items-center gap-3 font-mono text-sm font-medium text-lagoon-ink">
+            <span className="relative flex h-3 w-3" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-sonar rounded-full bg-lagoon" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-lagoon" />
+            </span>
+            {t("nowLabel")}
+          </p>
+          <dl className="mt-3 space-y-1 font-mono text-sm">
+            <div className="flex flex-wrap gap-x-2">
+              <dt className="text-mist">{t("nowWorking")}</dt>
+              <dd>{l(nowBlock.working)}</dd>
+            </div>
+            {nowBlock.next && (
+              <div className="flex flex-wrap gap-x-2">
+                <dt className="text-mist">{t("nowNext")}</dt>
+                <dd>{l(nowBlock.next)}</dd>
+              </div>
+            )}
+          </dl>
+        </Card>
+      </Reveal>
 
-            <Grid item xs={12} md={6} className=" 
-                p-4 
-                sm:p-6 
-                md:p-8 
-                h-auto 
-                text-center">
-              <Typography variant="h2" color="primnary" >
+      {aboutPhoto && (
+        <Reveal className="mt-10">
+          <img
+            src={aboutPhoto.src}
+            alt={l(aboutPhoto.alt)}
+            className="mx-auto max-h-[480px] w-auto max-w-full rounded-2xl border border-line"
+          />
+        </Reveal>
+      )}
 
-              {t("aboutMe")}
+      <Reveal className="mt-16">
+        <h3 className="font-sans text-2xl font-bold tracking-tight">{t("learningTitle")}</h3>
+        <p className="mt-2 font-mono text-sm text-mist">{t("learningSubtitle")}</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {learningItems.map((item) => (
+            <LinkCard
+              key={item.href}
+              href={item.href}
+              title={item.title}
+              description={l(item.description)}
+              logo={<img src={item.logo} alt={l(item.logoAlt)} className="h-full w-full object-contain" />}
+            />
+          ))}
+        </div>
+        <p className="mt-6 font-mono text-sm leading-relaxed text-mist">{l(learningFootnote)}</p>
+      </Reveal>
 
-              </Typography>
+      <Reveal className="mt-16">
+        <h3 className="font-sans text-2xl font-bold tracking-tight">{t("toolboxTitle")}</h3>
+        <div className="mt-6 space-y-5">
+          {toolbox.map((group, gi) => (
+            <div key={group.name.pt}>
+              <p className="font-mono text-xs uppercase tracking-widest text-mist">{l(group.name)}</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {group.tags.map((tag) => (
+                  <Tag key={tag} tone={toneCycle[gi % toneCycle.length] ?? "seaglass"}>
+                    {tag}
+                  </Tag>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+};
 
-            </Grid>
-
-            <Grid item xs={12} md={5}>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ 
-                opacity: 1,
-                x : 0
-                
-              }}
-              transition={{ duration: 0.3 }}
-              viewport={{once:true}}>
-              <Typography variant="body1" color="primary" textAlign="left" pb={2} fontWeight={"bold"} marginTop={"-40px"}>
-
-              <Trans
-               i18nKey="tx1" 
-              components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
-              />
-
-                </Typography>
-
-                </motion.div>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ 
-                opacity: 1,
-                x : 0
-                
-              }}
-              transition={{ duration: 0.3 }}
-              viewport={{once:true}}
->
-              <Typography variant="body1" color="primary" textAlign="left" pb={2} fontWeight={"bold"} marginTop={"-40px"} > 
-              <Trans
-               i18nKey="tx2" 
-              components={{ 1:  <span style= {{color: theme.palette.accent.main}}/>}}
-              />
-
-                 </Typography>
-                 </motion.div>
-            </Grid>
-
-            <Grid item xs={12} md={4} >
-              <Typography variant="h2" color="primary" >
-              <Trans 
-              i18nKey="skills" 
-              components={{ 1: <span color = "white"/>}} 
-              />
-              </Typography>
-            </Grid>
-            {/* Full-width band with two rows of icons: 5 on top, 4 on bottom */}
-            <Grid item xs={12} sx={{ mt: { xs: 2, md: 3 }, mb: { xs: 4, md: 6 } }}>
-              <Box sx={{ position: 'relative', left: '50%', right: '50%', ml: '-50vw', mr: '-50vw', width: '100vw', boxSizing: 'border-box' }}>
-                <StyledCard>
-                {(() => {
-                  const skills = [Git, Java, Angular, Spring, ReactLogo, Docker, CLogo, PostgresqlLogo, TypescriptLogo];
-                  const row1 = skills.slice(0, 5);
-                  const row2 = skills.slice(5);
-                  return (
-                    <>
-                      <Box
-                        sx={{
-                          display: 'grid',
-                          gridTemplateColumns: {
-                            xs: 'repeat(3, minmax(0, 1fr))',
-                            sm: 'repeat(4, minmax(0, 1fr))',
-                            md: 'repeat(5, minmax(0, 1fr))',
-                          },
-                          gap: { xs: 2, sm: 3, md: 4 },
-                          alignItems: 'center',
-                          justifyItems: 'center',
-                          mb: { xs: 2, md: 3 },
-                        }}
-                      >
-                        {row1.map((imgSrc, index) => (
-                          <Box key={`r1-${index}`} sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Box
-                              component="img"
-                              src={imgSrc}
-                              alt="skill"
-                              sx={{
-                                width: { xs: 110, sm: 140, md: 170, lg: 200 },
-                                height: 'auto',
-                                objectFit: 'contain',
-                              }}
-                            />
-                          </Box>
-                        ))}
-                      </Box>
-                      <Box
-                        sx={{
-                          display: 'grid',
-                          gridTemplateColumns: {
-                            xs: 'repeat(3, minmax(0, 1fr))',
-                            sm: 'repeat(4, minmax(0, 1fr))',
-                            md: 'repeat(4, minmax(0, 1fr))',
-                          },
-                          gap: { xs: 2, sm: 3, md: 4 },
-                          alignItems: 'center',
-                          justifyItems: 'center',
-                        }}
-                      >
-                        {row2.map((imgSrc, index) => (
-                          <Box key={`r2-${index}`} sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Box
-                              component="img"
-                              src={imgSrc}
-                              alt="skill"
-                              sx={{
-                                width: { xs: 110, sm: 140, md: 170, lg: 200 },
-                                height: 'auto',
-                                objectFit: 'contain',
-                              }}
-                            />
-                          </Box>
-                        ))}
-                      </Box>
-                    </>
-                  );
-                })()}
-                </StyledCard>
-              </Box>
-            </Grid>
-
-          </Grid>
-        </Container>
-      </StyledAbout>
-    </>
-  )
-}
-
-export default About
-
-
+export default About;

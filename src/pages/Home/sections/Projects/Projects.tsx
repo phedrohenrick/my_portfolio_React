@@ -1,84 +1,94 @@
-import styled from "@emotion/styled";
-import AnimatedBackground from "../../../../assets/images/AnimatedBackground/ProjectScreen.png";
-import { Container, Grid, Typography } from "@mui/material";
-import ProjectSlide from "../../../../components/StyledSlide.tsx/StyledSlide";
-import { useTranslation } from 'react-i18next';
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Card from "../../../../components/ui/Card";
+import Icon from "../../../../components/ui/Icon";
+import Reveal from "../../../../components/ui/Reveal";
+import SectionHeader from "../../../../components/ui/SectionHeader";
+import Tag from "../../../../components/ui/Tag";
+import { projects, type Project } from "../../../../data/projects";
+import { useLocalized } from "../../../../hooks/useLocalized";
 
-const Project = () => {
-  const {t} = useTranslation();
-
-  const StyledProjects = styled("div")(() => ({
-    backgroundImage: `url(${AnimatedBackground})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: "100vh",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    maxWidth: "100%"
-  }))
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
+const ProjectCard = ({ project }: { project: Project }) => {
+  const { t } = useTranslation();
+  const { l } = useLocalized();
+  const [open, setOpen] = useState(false);
+  const linkClass =
+    "inline-flex items-center gap-1 font-mono text-sm font-medium text-lagoon-ink underline-offset-4 hover:underline";
 
   return (
-    <StyledProjects id="projetos">
-      <Container>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+    <Card className="flex h-full flex-col overflow-hidden">
+      <img
+        src={project.image}
+        alt={l(project.title)}
+        loading="lazy"
+        className="aspect-[16/9] w-full border-b border-line bg-abyss object-cover"
+      />
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="font-sans text-lg font-semibold">{l(project.title)}</h3>
+          {project.featured && (
+            <span className="rounded-md bg-seafoam-soft px-2 py-0.5 font-mono text-xs text-seafoam-ink">
+              {t("projFeatured")}
+            </span>
+          )}
+          {project.inDevelopment && (
+            <span className="rounded-md bg-tide-soft px-2 py-0.5 font-mono text-xs text-tide-ink">{t("projInDev")}</span>
+          )}
+        </div>
+        <p className={`mt-3 font-mono text-sm leading-relaxed text-mist ${open ? "" : "line-clamp-4"}`}>
+          {l(project.description)}
+        </p>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="mt-1 self-start font-mono text-xs text-lagoon-ink underline underline-offset-4"
         >
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} md={12} fontWeight="bold" className="flex-row-reverse items-center justify-center sm:justify-start sm:m-0 gap-6 sm:gap-8 sm:mr-[20%] md:mr-[20%] lg:mr-[20%] xl:mr-[23%] 2xl:mr-[26%]">
-              <motion.div variants={itemVariants}>
-                <Typography 
-                  variant="h2" 
-                  color="primary" 
-                  fontWeight="bold" 
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold z-10"
-                >  
-                  {t("title_p")}
-                </Typography>
-              </motion.div>
-            </Grid>
-
-            <Grid item xs={12} md={12} className="font-bold mb-[100px] sm:mb-[50px] px-4 sm:px-6 md:px-8">
-              <motion.div variants={itemVariants}>
-                <ProjectSlide/>
-              </motion.div>
-            </Grid>
-          </Grid>
-        </motion.div>
-      </Container>
-    </StyledProjects>
+          {open ? t("readLess") : t("readMore")}
+        </button>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <Tag key={tag} tone="tide">
+              {tag}
+            </Tag>
+          ))}
+        </div>
+        <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-5">
+          {project.repo && (
+            <a href={project.repo} target="_blank" rel="noreferrer" className={linkClass}>
+              <Icon name="github" size={16} />
+              {t("projRepo")}
+            </a>
+          )}
+          {project.demo && (
+            <a href={project.demo} target="_blank" rel="noreferrer" className={linkClass}>
+              <Icon name="external" size={16} />
+              {t("projDemo")}
+            </a>
+          )}
+        </div>
+      </div>
+    </Card>
   );
 };
 
-export default Project;
+const Projects = () => {
+  const { t } = useTranslation();
+  // Destaques primeiro; todos na mesma grade, que se reorganiza conforme a largura.
+  const ordered = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)];
+
+  return (
+    <section id="projetos" className="mx-auto w-full max-w-6xl px-4 md:px-8 py-16 md:py-24">
+      <SectionHeader comment={t("projComment")} title={t("projTitle")} subtitle={t("projSubtitle")} />
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {ordered.map((p) => (
+          <Reveal key={p.id}>
+            <ProjectCard project={p} />
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Projects;

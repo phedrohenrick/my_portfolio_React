@@ -2,19 +2,4 @@
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
-  text-align: center;
 }
-.read-the-docs {
-  color: #888;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.relative {
-  position: relative;
-  margin: 0 auto; 
-}
-
-

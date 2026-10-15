@@ -1,111 +1,140 @@
-import { Box, Container, Grid, Typography, styled } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Icon from "../../../../components/ui/Icon";
+import PhotoStrip from "../../../../components/ui/PhotoStrip";
+import SectionHeader from "../../../../components/ui/SectionHeader";
+import { experiences } from "../../../../data/experience";
+import { useLocalized } from "../../../../hooks/useLocalized";
 
-type ExperienceItem = {
-  key: string;
-  link?: string;
-};
+const DOT_OFFSET = 14;
 
-const experiences: ExperienceItem[] = [
-  { key: "exp1" },
-  { key: "exp2", link: "https://priatoo.com.br" },
-  { key: "exp3" },
-  { key: "exp4" },
-];
-
-const Section = styled("section")(() => ({
-  width: "100%",
-  paddingTop: "48px",
-  paddingBottom: "48px",
-  background: "linear-gradient(180deg, rgba(230,126,34,0.08) 0%, rgba(230,126,34,0.04) 100%)",
-}));
-
-const Card = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(1.5),
-  padding: theme.spacing(2.5),
-  borderRadius: 16,
-  height: "100%",
-  background: "rgba(1, 44, 50, 0.06)",
-  border: "1px solid rgba(230, 126, 34, 0.3)",
-}));
+const splitSentences = (text: string) => text.split(/(?<=[.!?])\s+/).filter(Boolean);
 
 const Experience = () => {
   const { t } = useTranslation();
+  const { l } = useLocalized();
+  const reduce = useReducedMotion();
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [dotYs, setDotYs] = useState<number[]>([]);
+  const [lit, setLit] = useState(0);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      setDotYs(itemRefs.current.map((el) => (el ? el.offsetTop + DOT_OFFSET : 0)));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (trackRef.current) ro.observe(trackRef.current);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  const { scrollYProgress } = useScroll({ target: trackRef, offset: ["start 60%", "end 60%"] });
+  const first = dotYs[0] ?? 0;
+  const last = dotYs[dotYs.length - 1] ?? 0;
+
+  const rawY = useTransform(scrollYProgress, (p) => {
+    const h = trackRef.current?.offsetHeight ?? 0;
+    return Math.min(Math.max(p * h, first), last);
+  });
+  const y = useSpring(rawY, { stiffness: 90, damping: 20, mass: 0.6 });
+
+  useMotionValueEvent(y, "change", (v) => {
+    const count = Math.max(1, dotYs.filter((d) => v >= d - 2).length);
+    setLit((prev) => (prev === count ? prev : count));
+  });
+
+  const litCount = reduce ? experiences.length : Math.max(lit, 1);
 
   return (
-    <Section id="experiences">
-      <Container maxWidth="lg">
-        <Box textAlign="center" mb={{ xs: 3, md: 5 }}>
-          <Typography variant="h2" color="primary" sx={{ fontWeight: 700 }}>
-            {t("title_exp")}
-          </Typography>
-          <Typography variant="body2" color="primary" sx={{ opacity: 0.85 }}>
-            {t("subtitle_exp")}
-          </Typography>
-        </Box>
+    <section id="experiencia" className="mx-auto w-full max-w-6xl px-4 md:px-8 py-16 md:py-24">
+      <SectionHeader comment={t("expComment")} title={t("expTitle")} subtitle={t("expSubtitle")} />
 
-        <Grid container spacing={3}>
-          {experiences.map((exp, idx) => (
-            <Grid key={exp.key} item xs={12} md={6}>
+      <div ref={trackRef} className="relative pl-10">
+        <div aria-hidden="true" className="absolute bottom-0 left-[11px] top-0 w-0.5 -translate-x-1/2 rounded bg-line" />
+        {reduce ? (
+          <div aria-hidden="true" className="absolute bottom-0 left-[11px] top-0 w-0.5 -translate-x-1/2 rounded bg-seaglass" />
+        ) : (
+          <>
+            <motion.div
+              aria-hidden="true"
+              className="absolute left-[11px] top-0 w-0.5 -translate-x-1/2 rounded bg-seaglass"
+              style={{ height: y }}
+            />
+            <motion.div
+              aria-hidden="true"
+              className="absolute left-[11px] top-0 z-10"
+              style={{ y, marginLeft: -10, marginTop: -10 }}
+            >
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                viewport={{ once: true }}
-                style={{ height: "100%" }}
+                className="h-5 w-5 rounded-full border-[3px] border-white bg-seaglass shadow-[0_0_0_4px_rgba(111,168,168,0.25)]"
+                animate={{ x: [-2, 2, -2], rotate: [-6, 6, -6] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
+          </>
+        )}
+
+        <ol className="space-y-16">
+          {experiences.map((exp, i) => {
+            const isLit = i < litCount;
+            return (
+              <li
+                key={exp.id}
+                ref={(el) => {
+                  itemRefs.current[i] = el;
+                }}
+                className={`relative transition-opacity duration-500 ${isLit ? "opacity-100" : "opacity-60"}`}
               >
-                <Card>
-                  <Box display="flex" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={1}>
-                    <Typography variant="h5" color="primary" sx={{ fontWeight: 700 }}>
-                      {t(`${exp.key}_company`)}
-                    </Typography>
-                    <Box
-                      component="span"
-                      sx={{
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: 999,
-                        background: "rgba(230,126,34,0.18)",
-                        border: "1px solid rgba(230,126,34,0.35)",
-                        color: "#fbf5df",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        letterSpacing: 0.2,
-                      }}
-                    >
-                      {t(`${exp.key}_period`)}
-                    </Box>
-                  </Box>
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-[-29px] top-2 z-[5] h-3 w-3 -translate-x-1/2 rounded-full border-2 border-seaglass transition-colors duration-500 ${
+                    isLit ? "bg-seaglass" : "bg-foam"
+                  }`}
+                />
+                <h3 className="font-sans text-xl font-bold leading-snug tracking-tight md:text-2xl">{l(exp.role)}</h3>
+                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-mist">{l(exp.period)}</p>
+                <p className="mt-1 font-mono text-sm font-medium text-seaglass-ink">@ {l(exp.company)}</p>
+                {exp.link && (
+                  <a
+                    href={exp.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-1 inline-flex items-center gap-1 font-mono text-sm font-medium text-lagoon-ink underline-offset-4 hover:underline"
+                  >
+                    {t("btnVisitSite")}
+                    <Icon name="arrow" size={14} />
+                  </a>
+                )}
 
-                  <Typography variant="body2" color="primary" sx={{ fontWeight: 600 }}>
-                    {t(`${exp.key}_role`)}
-                  </Typography>
-                  <Typography variant="body2" color="primary">
-                    {t(`${exp.key}_desc`)}
-                  </Typography>
+                {exp.photos && (
+                  <div className="mt-5">
+                    <PhotoStrip photos={exp.photos.map((p) => ({ src: p.src, alt: l(p.alt) }))} />
+                  </div>
+                )}
 
-                  {exp.link && (
-                    <Typography variant="body2">
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{ color: "#E67E22", fontWeight: 700, textDecoration: "underline" }}
-                      >
-                        {t("btnVisitSite")}
-                      </a>
-                    </Typography>
-                  )}
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Section>
+                <ul className="mt-5 space-y-3">
+                  {splitSentences(l(exp.description)).map((sentence, si) => (
+                    <li key={si} className="flex gap-3 font-mono text-sm leading-7">
+                      <span aria-hidden="true" className="mt-0.5 shrink-0 text-seaglass">
+                        ▸
+                      </span>
+                      <span>{sentence}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </section>
   );
 };
 
