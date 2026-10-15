@@ -33,3 +33,24 @@ export const toolbox: ToolGroup[] = [
   { name: { pt: "Dados", en: "Data" }, tags: ["postgresql", "jpa", "hibernate"] },
   { name: { pt: "Front", en: "Front" }, tags: ["react", "typescript", "angular", "tailwind"] },
 ];
+
+// Nuvem de tecnologias ao lado da caixa de ferramentas. size: 3 = maior, 1 = menor.
+// Logos em public/images/tech (Devicon; Keycloak do Simple Icons).
+export type TechLogo = { name: string; logo: string; size: 1 | 2 | 3 };
+
+export const techCloud: TechLogo[] = [
+  { name: "Java", logo: "/images/tech/java.svg", size: 3 },
+  { name: "Spring", logo: "/images/tech/spring.svg", size: 3 },
+  { name: "Docker", logo: "/images/tech/docker.svg", size: 2 },
+  { name: "Quarkus", logo: "/images/tech/quarkus.svg", size: 2 },
+  { name: "PostgreSQL", logo: "/images/tech/postgresql.svg", size: 2 },
+  { name: "AWS", logo: "/images/tech/aws.svg", size: 2 },
+  { name: "Kafka", logo: "/images/tech/kafka.svg", size: 1 },
+  { name: "React", logo: "/images/tech/react.svg", size: 2 },
+  { name: "TypeScript", logo: "/images/tech/typescript.svg", size: 1 },
+  { name: "Keycloak", logo: "/images/tech/keycloak.svg", size: 1 },
+  { name: "Nginx", logo: "/images/tech/nginx.svg", size: 1 },
+  { name: "Hibernate", logo: "/images/tech/hibernate.svg", size: 1 },
+  { name: "Angular", logo: "/images/tech/angular.svg", size: 1 },
+  { name: "Tailwind CSS", logo: "/images/tech/tailwind.svg", size: 1 },
+];

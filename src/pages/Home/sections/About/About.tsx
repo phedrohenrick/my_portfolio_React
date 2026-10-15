@@ -5,7 +5,8 @@ import Reveal from "../../../../components/ui/Reveal";
 import Rich from "../../../../components/ui/Rich";
 import SectionHeader from "../../../../components/ui/SectionHeader";
 import Tag from "../../../../components/ui/Tag";
-import { aboutParagraphs, aboutPhoto, nowBlock, toolbox } from "../../../../data/about";
+import TechCloud from "../../../../components/ui/TechCloud";
+import { aboutParagraphs, aboutPhoto, nowBlock, techCloud, toolbox } from "../../../../data/about";
 import { learningFootnote, learningItems } from "../../../../data/learning";
 import { useLocalized } from "../../../../hooks/useLocalized";
 
@@ -81,19 +82,22 @@ const About = () => {
 
       <Reveal className="mt-16">
         <h3 className="font-sans text-2xl font-bold tracking-tight">{t("toolboxTitle")}</h3>
-        <div className="mt-6 space-y-5">
-          {toolbox.map((group, gi) => (
-            <div key={group.name.pt}>
-              <p className="font-mono text-xs uppercase tracking-widest text-mist">{l(group.name)}</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {group.tags.map((tag) => (
-                  <Tag key={tag} tone={toneCycle[gi % toneCycle.length] ?? "seaglass"}>
-                    {tag}
-                  </Tag>
-                ))}
+        <div className="mt-6 grid items-center gap-10 md:grid-cols-2">
+          <div className="space-y-5">
+            {toolbox.map((group, gi) => (
+              <div key={group.name.pt}>
+                <p className="font-mono text-xs uppercase tracking-widest text-mist">{l(group.name)}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {group.tags.map((tag) => (
+                    <Tag key={tag} tone={toneCycle[gi % toneCycle.length] ?? "seaglass"}>
+                      {tag}
+                    </Tag>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <TechCloud items={techCloud} />
         </div>
       </Reveal>
     </section>
