@@ -28,14 +28,18 @@ const Recommendations = () => {
             <Reveal className="h-full">
               <Card className="relative flex h-full flex-col p-6">
                 <Icon name="linkedin" size={18} className="absolute right-5 top-5 text-lagoon" />
-                <p className="font-mono text-sm leading-7">“{l(r.text)}”</p>
+                <blockquote className="space-y-4 pr-6 font-mono text-sm leading-7">
+                  {l(r.text)
+                    .split("\n\n")
+                    .map((paragraph, pi, all) => (
+                      <p key={pi}>
+                        {pi === 0 && "“"}
+                        {paragraph}
+                        {pi === all.length - 1 && "”"}
+                      </p>
+                    ))}
+                </blockquote>
                 <div className="mt-5 flex items-center gap-3">
-                  <img
-                    src={r.photo}
-                    alt={r.name}
-                    loading="lazy"
-                    className="h-12 w-12 rounded-xl border border-line object-cover"
-                  />
                   <div>
                     {r.linkedin ? (
                       <a
