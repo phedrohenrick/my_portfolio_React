@@ -1,25 +1,14 @@
-import { useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Avatar from "../../../../assets/images/Avatar1.png";
-import AnimatedBackground from "../../../../assets/images/AnimatedBackground/AnimatedBackground.svg";
 import TypingEffect from "../../../../components/Animations/TypingEffect";
 import Icon from "../../../../components/ui/Icon";
+import OceanWaves from "../../../../components/ui/OceanWaves";
 import Rich from "../../../../components/ui/Rich";
 import { social } from "../../../../data/social";
 
 const Hero = () => {
   const { t, i18n } = useTranslation();
-  const reduce = useReducedMotion();
   const isEn = i18n.language === "en";
-
-  const layer = reduce
-    ? { backgroundImage: 'linear-gradient(to bottom, #013f47, #eef7f7)' }
-    : {
-        backgroundImage: `url(${AnimatedBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center bottom',
-        backgroundRepeat: 'no-repeat',
-      };
 
   const socials = [
     { name: "github", href: social.github, label: "GitHub" },
@@ -30,7 +19,7 @@ const Hero = () => {
   return (
     <>
       <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#013f47] text-white">
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[420px]" style={layer} />
+        <OceanWaves className="absolute inset-x-0 bottom-0 h-[420px] w-full" />
         <div className="relative flex w-full items-start justify-between px-4 pt-6 md:px-6 md:pt-5">
           <a href="#top" aria-label={t("logoAria")} className="font-sans leading-none text-white no-underline">
             <span className="block text-sm font-medium tracking-wide">phedro</span>
