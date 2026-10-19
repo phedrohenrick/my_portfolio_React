@@ -22,6 +22,20 @@ const BRUSH_COLUMNS = 4; // raio (em colunas) da área afetada
 const ZONE_ABOVE_PX = 90; // a interação começa um pouco acima da primeira onda
 const MAX_OFFSET_PX = 60;
 
+// Agitação: onde o mar é mexido, a curvatura original das ondas é amplificada (cristas mais
+// altas, vales mais fundos) e surgem marolas curtas que sobem e descem, cada camada numa fase.
+// A agitação se espalha para os lados e se acalma aos poucos, voltando ao padrão normal.
+const AGITATION_AMPLIFY = 1.8; // no máximo, cristas e vales ficam (1 + 1.8)× mais pronunciados
+const CHOP_AMPLITUDE = 16; // altura das marolas, em unidades do viewBox
+const CHOP_WAVELENGTH = 130; // comprimento das marolas, em unidades do viewBox
+const CHOP_PERIOD = 1.4; // segundos por sobe-e-desce
+const AGITATION_DECAY = 0.985; // por passo (60/s): ~2–3 s para acalmar
+const AGITATION_SPREAD = 0.18;
+const AGITATION_RADIUS = 14; // colunas
+const HOVER_AGITATION = 0.08; // por movimento do mouse, proporcional à velocidade
+const TAP_AGITATION = 1;
+const MAX_AGITATION = 1.2;
+
 const NUM_RE = /-?\d*\.?\d+(?:e-?\d+)?/g;
 
 type Layer = {
@@ -33,6 +47,7 @@ type Layer = {
   shiftBegin: number; // atraso do deslizamento lateral, em segundos
   shift: number; // deslocamento lateral máximo, em unidades do viewBox
   top: number; // linha de base aproximada, para a zona de interação
+  mean: number; // altura média da superfície, referência para amplificar cristas e vales
 };
 
 // Lê as camadas do SVG: cada <path> tem um <animate> de "d" e um <animateTransform> de translate.
@@ -45,6 +60,7 @@ const parseLayers = (svg: string): Layer[] => {
     const nums = (d: string) => (d.match(NUM_RE) ?? []).map(Number);
     const a = nums(frames[0]);
     const shiftValues = attr(m[3], "values").split(";").map(Number);
+    const surfaceYs = a.filter((y, n) => n % 2 === 1 && y < VIEW_H - 1);
     layers.push({
       color: m[1],
       parts: frames[0].replace(NUM_RE, "\u0000").split("\u0000"),
@@ -54,6 +70,7 @@ const parseLayers = (svg: string): Layer[] => {
       shiftBegin: parseFloat(attr(m[3], "begin")) || 0,
       shift: Math.max(...shiftValues, 0),
       top: a[1] ?? 400,
+      mean: surfaceYs.reduce((sum, y) => sum + y, 0) / Math.max(1, surfaceYs.length),
     });
   }
   return layers;
@@ -76,7 +93,10 @@ const ease = (x: number) => {
 // Camadas da frente reagem mais que as do fundo, para dar profundidade.
 const layerWeight = (i: number) => 0.25 + (0.75 * i) / Math.max(1, LAYERS.length - 1);
 
-type Surface = { h: Float32Array; v: Float32Array };
+// Camadas oscilam em ritmos diferentes, para não se moverem em bloco.
+const layerStiffness = (i: number) => STIFFNESS * (0.7 + (0.6 * i) / Math.max(1, LAYERS.length - 1));
+
+type Surface = { h: Float32Array; v: Float32Array; e: Float32Array };
 
 const OceanWaves = ({ className = "" }: { className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -95,6 +115,7 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
     let offsetY = 0;
     let columns = 0;
     let surfaces: Surface[] = [];
+    let scratch = new Float32Array(0);
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -107,11 +128,16 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
       offsetX = (width - VIEW_W * scale) / 2;
       offsetY = height - VIEW_H * scale;
       columns = Math.ceil(width / COLUMN_PX) + 1;
-      surfaces = LAYERS.map(() => ({ h: new Float32Array(columns), v: new Float32Array(columns) }));
+      surfaces = LAYERS.map(() => ({
+        h: new Float32Array(columns),
+        v: new Float32Array(columns),
+        e: new Float32Array(columns),
+      }));
+      scratch = new Float32Array(columns);
     };
 
-    // Deslocamento da física (px) numa posição x da tela, interpolando entre colunas.
-    const offsetAt = (h: Float32Array, x: number) => {
+    // Valor de um campo por coluna numa posição x da tela, interpolando entre colunas.
+    const sampleAt = (h: Float32Array, x: number) => {
       const p = x / COLUMN_PX;
       const c = Math.floor(p);
       if (c < 0) return h[0];
@@ -130,14 +156,26 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
         const sp = (((t - layer.shiftBegin) % layer.dur) + layer.dur) % layer.dur / layer.dur;
         const tx = layer.shift * (sp < 0.5 ? ease(sp * 2) : 1 - ease(sp * 2 - 1));
 
-        const { h } = surfaces[i];
+        const { h, e } = surfaces[i];
+        const chopDir = i % 2 === 0 ? 1 : -1;
+        const chopLength = CHOP_WAVELENGTH * (0.85 + 0.03 * i);
+        const chopPhase = (2 * Math.PI * t) / CHOP_PERIOD;
         let d = layer.parts[0];
         for (let n = 0; n < layer.a.length; n++) {
           let value = layer.a[n] + (layer.b[n] - layer.a[n]) * k;
-          // Coordenadas y da superfície (não as do fechamento embaixo) recebem a física.
+          // Coordenadas y da superfície (não as do fechamento embaixo) recebem a interação.
           if (n % 2 === 1 && value < VIEW_H - 1) {
             const x = layer.a[n - 1] + (layer.b[n - 1] - layer.a[n - 1]) * k;
-            value += offsetAt(h, offsetX + (x + tx) * scale) / scale;
+            const screenX = offsetX + (x + tx) * scale;
+            const agitation = sampleAt(e, screenX);
+            if (agitation > 0.001) {
+              value = layer.mean + (value - layer.mean) * (1 + AGITATION_AMPLIFY * agitation);
+              value +=
+                agitation *
+                CHOP_AMPLITUDE *
+                Math.sin((2 * Math.PI * (x + tx)) / chopLength - chopDir * chopPhase + i * 1.3);
+            }
+            value += sampleAt(h, screenX) / scale;
           }
           d += value.toFixed(2) + layer.parts[n + 1];
         }
@@ -148,9 +186,10 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
     };
 
     const step = () => {
-      for (const { h, v } of surfaces) {
+      surfaces.forEach(({ h, v, e }, i) => {
+        const stiffness = layerStiffness(i);
         for (let c = 0; c < columns; c++) {
-          v[c] += -STIFFNESS * h[c] - DAMPING * v[c];
+          v[c] += -stiffness * h[c] - DAMPING * v[c];
           h[c] = Math.max(-MAX_OFFSET_PX, Math.min(MAX_OFFSET_PX, h[c] + v[c]));
         }
         for (let pass = 0; pass < SPREAD_PASSES; pass++) {
@@ -160,7 +199,14 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
             v[c] -= d;
           }
         }
-      }
+        // Agitação: espalha para os lados e se acalma.
+        for (let c = 0; c < columns; c++) {
+          const left = e[c > 0 ? c - 1 : c];
+          const right = e[c < columns - 1 ? c + 1 : c];
+          scratch[c] = (e[c] + AGITATION_SPREAD * (left + right - 2 * e[c])) * AGITATION_DECAY;
+        }
+        e.set(scratch);
+      });
     };
 
     // Empurra a superfície para cima (y negativo) em torno de x, com queda suave nas bordas.
@@ -173,6 +219,20 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
           if (c < 0 || c >= columns) continue;
           const falloff = Math.cos((k / (BRUSH_COLUMNS + 1)) * (Math.PI / 2));
           v[c] -= w * falloff * falloff;
+        }
+      });
+    };
+
+    // Mexe o mar em torno de x: aumenta a agitação (cristas, vales e marolas).
+    const agitate = (x: number, amount: number) => {
+      const center = Math.round(x / COLUMN_PX);
+      surfaces.forEach(({ e }, i) => {
+        const w = (0.5 + 0.5 * layerWeight(i)) * amount;
+        for (let k = -AGITATION_RADIUS; k <= AGITATION_RADIUS; k++) {
+          const c = center + k;
+          if (c < 0 || c >= columns) continue;
+          const falloff = Math.cos((k / (AGITATION_RADIUS + 1)) * (Math.PI / 2));
+          e[c] = Math.min(MAX_AGITATION, e[c] + w * falloff * falloff);
         }
       });
     };
@@ -213,6 +273,7 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
       if (near > 0 && lastX !== null) {
         const speed = Math.min(1, Math.abs(x - lastX) / 20);
         push(x, HOVER_FORCE * speed * near);
+        agitate(x, HOVER_AGITATION * speed * near);
       }
       lastX = x;
     };
@@ -221,7 +282,10 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
       const { x, y } = local(e);
       if (x < 0 || x > width || y > height) return;
       const near = proximity(y);
-      if (near > 0) push(x, TAP_IMPULSE * near);
+      if (near > 0) {
+        push(x, TAP_IMPULSE * near);
+        agitate(x, TAP_AGITATION * near);
+      }
     };
 
     let frame = 0;
