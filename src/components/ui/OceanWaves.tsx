@@ -17,7 +17,7 @@ const SPREAD_PASSES = 4;
 
 // Interação.
 const HOVER_FORCE = 0.55; // empurrão do mouse, proporcional à velocidade do cursor
-const TAP_IMPULSE = 9; // marola do toque/clique
+const TAP_IMPULSE = 10; // marola do toque/clique
 const BRUSH_COLUMNS = 4; // raio (em colunas) da área afetada
 const ZONE_ABOVE_PX = 90; // a interação começa um pouco acima da primeira onda
 const MAX_OFFSET_PX = 60;
@@ -25,16 +25,26 @@ const MAX_OFFSET_PX = 60;
 // Agitação: onde o mar é mexido, a curvatura original das ondas é amplificada (cristas mais
 // altas, vales mais fundos) e surgem marolas curtas que sobem e descem, cada camada numa fase.
 // A agitação se espalha para os lados e se acalma aos poucos, voltando ao padrão normal.
-const AGITATION_AMPLIFY = 1.8; // no máximo, cristas e vales ficam (1 + 1.8)× mais pronunciados
-const CHOP_AMPLITUDE = 16; // altura das marolas, em unidades do viewBox
-const CHOP_WAVELENGTH = 130; // comprimento das marolas, em unidades do viewBox
-const CHOP_PERIOD = 1.4; // segundos por sobe-e-desce
+const AGITATION_AMPLIFY = 0.9; // no máximo, cristas e vales ficam (1 + 0.9)× mais pronunciados
+const CHOP_AMPLITUDE = 7; // altura das marolas, em unidades do viewBox
+const CHOP_WAVELENGTH = 280; // comprimento das marolas, em unidades do viewBox
+const CHOP_PERIOD = 2.6; // segundos por sobe-e-desce
 const AGITATION_DECAY = 0.985; // por passo (60/s): ~2–3 s para acalmar
 const AGITATION_SPREAD = 0.18;
 const AGITATION_RADIUS = 14; // colunas
 const HOVER_AGITATION = 0.08; // por movimento do mouse, proporcional à velocidade
 const TAP_AGITATION = 1;
-const MAX_AGITATION = 1.2;
+const MAX_AGITATION = 1;
+
+// Frente de onda do clique: um anel de agitação que corre para os dois lados, como uma pedra na água.
+const RIPPLE_SPEED = 520; // px/s
+const RIPPLE_WIDTH = 140; // largura da frente, em px
+const RIPPLE_LIFE = 3.2; // segundos até sumir
+const RIPPLE_STRENGTH = 1.2;
+const MAX_RIPPLES = 8;
+
+type Ripple = { x: number; born: number; strength: number };
+const clock = () => performance.now() / 1000;
 
 const NUM_RE = /-?\d*\.?\d+(?:e-?\d+)?/g;
 
@@ -116,6 +126,20 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
     let columns = 0;
     let surfaces: Surface[] = [];
     let scratch = new Float32Array(0);
+    let ripples: Ripple[] = [];
+
+    // Agitação vinda das frentes de onda numa posição x da tela, no instante "now".
+    const rippleAt = (x: number, now: number) => {
+      let sum = 0;
+      for (const r of ripples) {
+        const age = now - r.born;
+        if (age < 0 || age > RIPPLE_LIFE) continue;
+        const fade = 1 - age / RIPPLE_LIFE;
+        const front = (Math.abs(x - r.x) - RIPPLE_SPEED * age) / RIPPLE_WIDTH;
+        sum += r.strength * fade * fade * Math.exp(-front * front);
+      }
+      return sum;
+    };
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -148,6 +172,8 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
     const draw = (t: number) => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const now = clock();
+      ripples = ripples.filter((r) => now - r.born <= RIPPLE_LIFE);
       LAYERS.forEach((layer, i) => {
         // Forma: a → b → a ao longo de "dur" (linear, como no SVG).
         const phase = (t % layer.dur) / layer.dur;
@@ -167,7 +193,10 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
           if (n % 2 === 1 && value < VIEW_H - 1) {
             const x = layer.a[n - 1] + (layer.b[n - 1] - layer.a[n - 1]) * k;
             const screenX = offsetX + (x + tx) * scale;
-            const agitation = sampleAt(e, screenX);
+            const agitation = Math.min(
+              MAX_AGITATION,
+              sampleAt(e, screenX) + rippleAt(screenX, now) * (0.5 + 0.5 * layerWeight(i)),
+            );
             if (agitation > 0.001) {
               value = layer.mean + (value - layer.mean) * (1 + AGITATION_AMPLIFY * agitation);
               value +=
@@ -285,6 +314,7 @@ const OceanWaves = ({ className = "" }: { className?: string }) => {
       if (near > 0) {
         push(x, TAP_IMPULSE * near);
         agitate(x, TAP_AGITATION * near);
+        ripples = [...ripples, { x, born: clock(), strength: RIPPLE_STRENGTH * near }].slice(-MAX_RIPPLES);
       }
     };
 
