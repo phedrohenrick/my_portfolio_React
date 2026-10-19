@@ -11,7 +11,7 @@ const Contact = () => {
   return (
     <footer id="contato" className="mx-auto w-full max-w-6xl px-4 md:px-8 pb-12 pt-16 md:pt-24">
       <Reveal>
-        <SectionHeader comment={t("contactComment")} title={`${t("contactTitle")} 📡`} subtitle={t("contactSubtitle")} />
+        <SectionHeader comment={t("contactComment")} title={`${t("contactTitle")}`} subtitle={t("contactSubtitle")} />
         <div className="grid gap-4 sm:grid-cols-2">
           <LinkCard
             href={`mailto:${social.email}`}
