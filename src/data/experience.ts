@@ -2,6 +2,7 @@ import gcTdcFloripa from "../assets/images/experience/globalcode-tdc-floripa.jpg
 import gcTdcSp from "../assets/images/experience/globalcode-tdc-sp-2026.jpg";
 import gcSetup from "../assets/images/experience/globalcode-setup.jpg";
 import gcVoo from "../assets/images/experience/globalcode-voo.jpg";
+import priatooIpad from "../assets/images/experience/priatoo-ipad.jpg";
 import type { Localized, Photo } from "./types";
 
 export type ExperienceItem = {
@@ -61,7 +62,15 @@ export const experiences: ExperienceItem[] = [
       en: "I worked as a full stack engineer on a multi-tenant digital menu SaaS: Java 21 and Spring Boot backend with Spring Security (OAuth2/JWT) authentication and Keycloak, PostgreSQL, and Nginx as a reverse proxy via Docker Compose. On the frontend, I built three fronts in React — the marketing landing page, the customer-facing digital menu, and the shop owner's management panel — with dynamic per-tenant theming.",
     },
     link: "https://priatoo.com.br",
-    photos: [],
+    photos: [
+      {
+        src: priatooIpad,
+        alt: {
+          pt: "Landing page do Priatoo aberta num iPad, com uma impressora térmica de pedidos na frente",
+          en: "Priatoo landing page on an iPad, with a thermal order printer in front",
+        },
+      },
+    ],
   },
   {
     id: "ifg",
