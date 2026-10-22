@@ -10,7 +10,6 @@
     "btnCv": "Currículo",
     "btnContact": "Contato",
     "coords": "Goiânia · 16°40'S 49°15'W",
-
     "aboutComment": "// 02 — sobre",
     "aboutTitle": "Sobre mim",
     "nowLabel": "agora",
@@ -19,12 +18,10 @@
     "learningTitle": "Como me atualizo",
     "learningSubtitle": "Onde estudo e de onde vem meu roadmap.",
     "toolboxTitle": "Caixa de ferramentas",
-
     "expComment": "// 03 — experiência",
     "expTitle": "Minha rota até aqui",
     "expSubtitle": "Do suporte de redes ao backend que roda o TDC.",
     "btnVisitSite": "visitar site",
-
     "projComment": "// 04 — projetos",
     "projTitle": "O que construí",
     "projSubtitle": "Projetos pessoais e profissionais.",
@@ -34,25 +31,15 @@
     "projDemo": "ver online",
     "readMore": "ler mais",
     "readLess": "ler menos",
-
     "achComment": "// 05 — conquistas",
     "achTitle": "Conquistas",
     "achSubtitle": "Marcos que me trouxeram até aqui.",
-
-    "shelfComment": "// 06 — estante",
-    "shelfTitle": "Estante",
-    "shelfSubtitle": "O que leio e assisto.",
     "shelfBooks": "Livros",
     "shelfChannels": "Canais do YouTube",
-    "shelfArticles": "Artigos",
-    "statusRead": "lido",
-    "statusReading": "lendo",
-
     "recComment": "// 07 — recomendações",
     "recTitle": "O que dizem sobre mim",
     "recSubtitle": "Comentários de quem já trabalhou comigo, direto do LinkedIn.",
     "recViewLinkedin": "ver no LinkedIn",
-
     "contactComment": "// 08 — contato",
     "contactTitle": "Mande um sinal",
     "contactSubtitle": "Vamos conversar? Escolha o canal que preferir.",
@@ -61,10 +48,10 @@
     "contactCv": "Baixar currículo",
     "footerNote": "feito com react, tailwind e muita água salgada",
     "footerRights": "Todos os direitos reservados.",
-
     "lightboxClose": "Fechar imagem",
     "photosAria": "Fotos, role para o lado",
     "photosPrev": "Fotos anteriores",
-    "photosNext": "Próximas fotos"
+    "photosNext": "Próximas fotos",
+    "readingNow": "lendo agora"
   }
 }

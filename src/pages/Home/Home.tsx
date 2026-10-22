@@ -6,7 +6,6 @@ import About from "./sections/About/About"
 import Experience from "./sections/Experience/Experience"
 import Projects from "./sections/Projects/Projects"
 import Achievements from "./sections/Achievements/Achievements"
-import Bookshelf from "./sections/Bookshelf/Bookshelf"
 import Recommendations from "./sections/Recommendations/Recommendations"
 import Contact from "./sections/Contact/Contact"
 
@@ -34,7 +33,6 @@ const Home = () => {
       <Experience />
       <Projects />
       <Achievements />
-      <Bookshelf />
       <Recommendations />
       <Contact />
       <Analytics />

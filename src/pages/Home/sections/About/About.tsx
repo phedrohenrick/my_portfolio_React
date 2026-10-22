@@ -7,6 +7,8 @@ import SectionHeader from "../../../../components/ui/SectionHeader";
 import Tag from "../../../../components/ui/Tag";
 import TechCloud from "../../../../components/ui/TechCloud";
 import { aboutParagraphs, aboutPhoto, nowBlock, techCloud, toolbox } from "../../../../data/about";
+import BookCarousel from "../../../../components/ui/BookCarousel";
+import { books, channels } from "../../../../data/bookshelf";
 import { learningFootnote, learningItems } from "../../../../data/learning";
 import { useLocalized } from "../../../../hooks/useLocalized";
 
@@ -77,6 +79,27 @@ const About = () => {
             />
           ))}
         </div>
+
+        {books.length > 0 && (
+          <div className="mt-10">
+            <p className="font-mono text-xs uppercase tracking-widest text-mist">{t("shelfBooks")}</p>
+            <div className="mt-2">
+              <BookCarousel books={books} />
+            </div>
+          </div>
+        )}
+
+        {channels.length > 0 && (
+          <div className="mt-8">
+            <p className="font-mono text-xs uppercase tracking-widest text-mist">{t("shelfChannels")}</p>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {channels.map((c) => (
+                <LinkCard key={c.link} href={c.link} title={c.name} description={l(c.why)} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <p className="mt-6 font-mono text-sm leading-relaxed text-mist">{l(learningFootnote)}</p>
       </Reveal>
 
