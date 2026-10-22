@@ -3,6 +3,8 @@ import gcTdcSp from "../assets/images/experience/globalcode-tdc-sp-2026.jpg";
 import gcSetup from "../assets/images/experience/globalcode-setup.jpg";
 import gcVoo from "../assets/images/experience/globalcode-voo.jpg";
 import priatooIpad from "../assets/images/experience/priatoo-ipad.jpg";
+import priatooMesa from "../assets/images/experience/priatoo-mesa.jpg";
+import priatooSelfie from "../assets/images/experience/priatoo-selfie.jpg";
 import type { Localized, Photo } from "./types";
 
 export type ExperienceItem = {
@@ -64,10 +66,24 @@ export const experiences: ExperienceItem[] = [
     link: "https://priatoo.com.br",
     photos: [
       {
+        src: priatooSelfie,
+        alt: {
+          pt: "Phedro no setup de trabalho, com o logo do Priatoo no monitor",
+          en: "Phedro at the desk setup, with the Priatoo logo on the monitor",
+        },
+      },
+      {
         src: priatooIpad,
         alt: {
           pt: "Landing page do Priatoo aberta num iPad, com uma impressora térmica de pedidos na frente",
           en: "Priatoo landing page on an iPad, with a thermal order printer in front",
+        },
+      },
+      {
+        src: priatooMesa,
+        alt: {
+          pt: "Mesa de trabalho vista de cima, com monitor, notebook, iPad e impressora de pedidos",
+          en: "Top-down view of the desk, with monitor, laptop, iPad and order printer",
         },
       },
     ],
