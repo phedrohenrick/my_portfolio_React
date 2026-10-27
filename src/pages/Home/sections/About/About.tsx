@@ -7,9 +7,9 @@ import SectionHeader from "../../../../components/ui/SectionHeader";
 import Tag from "../../../../components/ui/Tag";
 import TechCloud from "../../../../components/ui/TechCloud";
 import { aboutParagraphs, aboutPhoto, nowBlock, techCloud, toolbox } from "../../../../data/about";
-import BookCarousel from "../../../../components/ui/BookCarousel";
-import { books, channels } from "../../../../data/bookshelf";
-import { learningFootnote, learningItems } from "../../../../data/learning";
+import { channels } from "../../../../data/bookshelf";
+import Articles from "../Articles/Articles";
+import { learningItems } from "../../../../data/learning";
 import { useLocalized } from "../../../../hooks/useLocalized";
 
 const toneCycle = ["seaglass", "tide", "lagoon", "seafoam"] as const;
@@ -80,14 +80,8 @@ const About = () => {
           ))}
         </div>
 
-        {books.length > 0 && (
-          <div className="mt-10">
-            <p className="font-mono text-xs uppercase tracking-widest text-mist">{t("shelfBooks")}</p>
-            <div className="mt-2">
-              <BookCarousel books={books} />
-            </div>
-          </div>
-        )}
+        {/* Os livros que li (BookCarousel) saíram por enquanto; os artigos ocupam o lugar. */}
+        <Articles embedded />
 
         {channels.length > 0 && (
           <div className="mt-8">
@@ -99,8 +93,6 @@ const About = () => {
             </div>
           </div>
         )}
-
-        <p className="mt-6 font-mono text-sm leading-relaxed text-mist">{l(learningFootnote)}</p>
       </Reveal>
 
       <Reveal className="mt-16">
