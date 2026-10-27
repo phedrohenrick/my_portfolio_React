@@ -2,13 +2,13 @@ import { useTranslation } from "react-i18next";
 import Avatar from "../../../../assets/images/Avatar1.png";
 import TypingEffect from "../../../../components/Animations/TypingEffect";
 import Icon from "../../../../components/ui/Icon";
+import LangToggle from "../../../../components/ui/LangToggle";
 import OceanWaves from "../../../../components/ui/OceanWaves";
 import Rich from "../../../../components/ui/Rich";
 import { social } from "../../../../data/social";
 
 const Hero = () => {
-  const { t, i18n } = useTranslation();
-  const isEn = i18n.language === "en";
+  const { t } = useTranslation();
 
   const socials = [
     { name: "github", href: social.github, label: "GitHub" },
@@ -25,16 +25,7 @@ const Hero = () => {
             <span className="block text-sm font-medium tracking-wide">phedro</span>
             <span className="block text-3xl font-bold tracking-tight">henrick</span>
           </a>
-          <button
-            type="button"
-            onClick={() => i18n.changeLanguage(isEn ? "pt" : "en")}
-            aria-label={t("langAria")}
-            className="rounded-full border border-white/30 px-3 py-1 font-mono text-xs"
-          >
-            <span className={isEn ? "text-white/60" : "font-semibold text-white"}>PT</span>
-            <span className="text-white/60"> | </span>
-            <span className={isEn ? "font-semibold text-white" : "text-white/60"}>EN</span>
-          </button>
+          <LangToggle />
         </div>
 
         <div className="relative mx-auto grid w-full max-w-6xl flex-1 content-center items-center gap-10 px-4 pb-48 pt-12 md:grid-cols-[auto_1fr] md:gap-16 md:px-8 md:pb-56 md:pt-8 lg:gap-24">

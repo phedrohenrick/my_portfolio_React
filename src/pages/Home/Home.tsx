@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet"
-import { Analytics } from "@vercel/analytics/react"
 import { useTranslation } from "react-i18next"
 import Hero from "./sections/Hero/Hero"
 import About from "./sections/About/About"
@@ -35,7 +34,6 @@ const Home = () => {
       <Achievements />
       <Recommendations />
       <Contact />
-      <Analytics />
     </main>
   )
 }
